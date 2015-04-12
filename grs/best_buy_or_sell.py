@@ -48,14 +48,14 @@ class BestFourPoint(object):
 
     ##### 四大買點 #####
     def best_buy_1(self):
-        """ 量大收紅(今日量>昨日量 and 收盤價格>開盤價格)
+        """ 量大收紅(今日量>昨日量 and 收盤價格>開盤價格 and 負乖離股價在移動平均線下)
         """
         result = self.data.value[-1] > self.data.value[-2] and \
                  self.data.price[-1] > self.data.openprice[-1]
         return result
 
     def best_buy_2(self):
-        """ 量縮價不跌(今日量<昨日量 and 今日收盤價格>昨日收盤價格)
+        """ 量縮價不跌(今日量<昨日量 and 今日收盤價格>昨日收盤價格 and 負乖離股價在移動平均線下)
         """
         result = self.data.value[-1] < self.data.value[-2] and \
                  self.data.price[-1] > self.data.price[-2]
@@ -104,9 +104,15 @@ class BestFourPoint(object):
             :rtype: str or False
         """
         result = []
-        if self.check_mins_bias_ratio() and \
-            (self.best_buy_1() or self.best_buy_2() or self.best_buy_3() or \
+#        if self.check_mins_bias_ratio() and \
+#            (self.best_buy_1() or self.best_buy_2() or self.best_buy_3() or \
+#             self.best_buy_4()):
+        
+        
+        if  (self.best_buy_1() or self.best_buy_2() or self.best_buy_3() or \
              self.best_buy_4()):
+
+        
             if self.best_buy_1():
                 result.append(self.best_buy_1.__doc__.strip().decode('utf-8'))
             if self.best_buy_2():
