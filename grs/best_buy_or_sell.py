@@ -48,14 +48,14 @@ class BestFourPoint(object):
 
     ##### 四大買點 #####
     def best_buy_1(self):
-        """ 量大收紅
+        """ 量大收紅(今日量>昨日量 and 收盤價格>開盤價格)
         """
         result = self.data.value[-1] > self.data.value[-2] and \
                  self.data.price[-1] > self.data.openprice[-1]
         return result
 
     def best_buy_2(self):
-        """ 量縮價不跌
+        """ 量縮價不跌(今日量<昨日量 and 今日收盤價格>昨日收盤價格)
         """
         result = self.data.value[-1] < self.data.value[-2] and \
                  self.data.price[-1] > self.data.price[-2]
@@ -74,7 +74,7 @@ class BestFourPoint(object):
 
     ##### 四大賣點 #####
     def best_sell_1(self):
-        """ 量大收黑
+        """ 量大收黑(今日量>昨日量,今日收盤)
         """
         result = self.data.value[-1] > self.data.value[-2] and \
                  self.data.price[-1] < self.data.openprice[-1]
@@ -115,7 +115,8 @@ class BestFourPoint(object):
                 result.append(self.best_buy_3.__doc__.strip().decode('utf-8'))
             if self.best_buy_4():
                 result.append(self.best_buy_4.__doc__.strip().decode('utf-8'))
-            result = ', '.join(result)
+            #result = ', '.join(result)
+            result = '\n  '.join(result)
         else:
             result = False
         return result
