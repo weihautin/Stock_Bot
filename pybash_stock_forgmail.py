@@ -112,7 +112,7 @@ title = title.encode("ascii","ignore")
 
 os.system('sendEmail -o \
  -f u160895@taipower.com.tw \
- -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw hautinboy@yahoo.com.tw\
+ -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
  -s smtp.gmail.com:587 \
  -xu %s \
  -xp %s \
