@@ -38,6 +38,15 @@ class BestFourPoint(object):
                                self.data.moving_average_bias_ratio(3, 6)[0], #三日乖離率與六日乖離率的差
                                positive_or_negative=positive_or_negative)[0]
 
+    def golden_cross(self):
+        """ 黃金交叉         
+
+            :rtype: str or False
+        """
+        return self.data.moving_average_bias_ratio(3, 6)[0]
+       # return self.data.golden_cross_5_20(tmp, sample)
+
+
     def check_plus_bias_ratio(self):
         """ 正乖離扣至最大 """
         return self.bias_ratio(True)
@@ -119,8 +128,8 @@ class BestFourPoint(object):
                 result.append(self.best_buy_3.__doc__.strip().decode('utf-8'))
             if self.best_buy_4():
                 result.append(self.best_buy_4.__doc__.strip().decode('utf-8'))
-            #result = ', '.join(result)
-            result = '\n  '.join(result)
+            result = ', '.join(result)
+            #result = '\n  '.join(result)
         else:
             result = False
         return result
@@ -146,6 +155,8 @@ class BestFourPoint(object):
         else:
             result = False
         return result
+
+
 
     def best_four_point(self):
         """ 判斷買點或賣點

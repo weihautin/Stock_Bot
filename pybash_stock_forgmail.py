@@ -43,32 +43,42 @@ PW = f.readline().strip('\n')
 
 fileopen.write('上市公司股票篩選\n\n\n')
 
+
 j = 1
 for i in stock_no_list:
     #print i, '上市', Stock_no_name[i]
     try:
         best_point, info = BestFourPoint(Stock(i)).best_four_point()
-       
         if best_point:           # 買點
-           ### fileopen.write(str(j)+' '+'Buy'+' '+i+' ('+Stock_no_name[i].encode("UTF-8")+')'\
+           ## fileopen.write(str(j)+' '+'Buy'+' '+i+' ('+Stock_no_name[i].encode("UTF-8")+')'\
            ### +'  成交張數(含零股)  '+ str(Stock(i).raw[-1][1]/1000) +                 '\n')
 
            ## txt = "%-2d Buy%6s%10s 成交張數(包含零股):%9.1f \n"%(j,i,Stock_no_name[i].encode("UTF-8"),Stock(i).raw[-1][1]/1000)
            ## fileopen.write(txt)
-
-
             fileopen.write(str(j)+' '+'Buy'+' '+i+' ('+Stock_no_name[i].encode("UTF-8")+')'+'\n')
             fileopen.write('  成交張數:'+str(int(Stock(i).raw[-1][1]/1000))+'\n')
-
-
-
             fileopen.write('  '+info.encode("UTF-8"))
             fileopen.write('\n\n')
             fileopen.write('----------------------------------\n')
-           
             j+=1
     except:     # 不作為或資料不足
         pass
+
+        
+"""    
+j = 1
+for i in stock_no_list:
+    try:
+        best_point, info = BestFourPoint(Stock(i)).best_four_point()
+    except ValueError: #印出三個月內有資料不足的股票,可能當日都沒交易傳回 - 字串
+        print 'ValueError',i 
+    else:
+	pass
+"""
+
+
+        
+       
 fileopen.write('\n\n\n上櫃公司股票篩選\n\n\n')
 
 """

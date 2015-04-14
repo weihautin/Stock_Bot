@@ -429,6 +429,20 @@ class SimpleAnalytics(object):
                 sample_data.index(ckvalue) != sample - 1 and preckvalue,
                 sample - sample_data.index(ckvalue) - 1,
                 ckvalue)
+	
+    @classmethod
+    def golden_cross_5_20(cls, data, sample=5,
+                                  positive_or_negative=False):
+        """判斷轉折點位置
+
+           :param list data: 計算資料
+           :param int sample: 計算的區間樣本數量
+           :param bool positive_or_negative: 正乖離 為 True，負乖離 為 False
+           :rtype: tuple
+           :returns: (True or False, 第幾個轉折日, 轉折點值)
+        """
+	return '123'       
+
 
     @classmethod
     def check_moving_average_bias_ratio(cls, data, sample=5,
