@@ -71,7 +71,7 @@ for i in stock_no_list:
         pass
 fileopen.write('\n\n\n上櫃公司股票篩選\n\n\n')
 
-
+"""
 j = 1
 for i in OTC_no_list:
     #print i,'上櫃', OTC_no_name[i]
@@ -93,23 +93,11 @@ for i in OTC_no_list:
             j+=1
     except:     # 不作為或資料不足
         pass
-   
+"""   
 fileopen.close()                #關閉檔案
 
 
-# 透過sendEmail附加檔案寄送Email
 """
-ID = ID.decode("utf-8")
-ID = ID.encode("ascii","ignore")
-ll
-
-PW = PW.decode("utf-8")
-PW = PW.encode("ascii","ignore")
-
-title = title.decode("utf-8")
-title = title.encode("ascii","ignore")
-"""
-
 os.system('sendEmail -o \
  -f u160895@taipower.com.tw \
  -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
@@ -120,7 +108,7 @@ os.system('sendEmail -o \
  -m %s \
  -a %s \
  '%(ID, PW, title, content, attachment))
-
+"""
 
  
  
