@@ -104,13 +104,15 @@ class BestFourPoint(object):
             :rtype: str or False
         """
         result = []
-        if self.check_mins_bias_ratio() and \
-            (self.best_buy_1() or self.best_buy_2() or self.best_buy_3() or \
+#        if self.check_mins_bias_ratio() and \
+#            (self.best_buy_1() or self.best_buy_2() or self.best_buy_3() or \
+#             self.best_buy_4()):
+        
+        
+        if  (self.best_buy_1() or self.best_buy_2() or self.best_buy_3() or \
              self.best_buy_4()):
 
-#        if  (self.best_buy_1() or self.best_buy_2() or self.best_buy_3() or \
-#             self.best_buy_4()):
-
+        
             if self.best_buy_1():
                 result.append(self.best_buy_1.__doc__.strip().decode('utf-8'))
             if self.best_buy_2():
