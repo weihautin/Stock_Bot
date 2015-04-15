@@ -38,13 +38,13 @@ class BestFourPoint(object):
                                self.data.moving_average_bias_ratio(3, 6)[0], #三日乖離率與六日乖離率的差
                                positive_or_negative=positive_or_negative)[0]
 
-    def golden_cross(self, back_to_test_n_days, positive_or_negative=False):
+    def golden_cross(self, m, n, back_to_test_n_days, positive_or_negative=False):
         """ 黃金交叉         
 
             :rtype: str or False
         """
 	return self.data.golden_cross_5_20(back_to_test_n_days,       
-                               self.data.moving_average_bias_ratio(5, 20)[0],
+                               self.data.moving_average_bias_ratio(m, n)[0],
                                positive_or_negative=positive_or_negative)
 
 	# return self.data.moving_average_bias_ratio(5, 20)[0]

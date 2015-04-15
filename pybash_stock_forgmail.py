@@ -82,7 +82,7 @@ j = 1
 for i in stock_no_list:
     
     try:
-        if BestFourPoint(Stock(i)).golden_cross(back_to_test_n_days=20)[0]:
+        if BestFourPoint(Stock(i)).golden_cross(m=5,n=20,back_to_test_n_days=20)[0]:
             # 5日均線黃金交叉20日均線,並且要回測N天.
             print i
     except:     # 回傳為None 或 資料不足導致ValueError
