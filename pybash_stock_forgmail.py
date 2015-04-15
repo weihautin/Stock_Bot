@@ -82,13 +82,29 @@ j = 1
 for i in stock_no_list:
     
     try:
-        if BestFourPoint(Stock(i)).golden_cross(back_to_test_n_days=15)[0]:
+        if BestFourPoint(Stock(i)).golden_cross(back_to_test_n_days=20)[0]:
+            # 5日均線黃金交叉20日均線,並且要回測N天.
             print i
     except:     # 回傳為None 或 資料不足導致ValueError
         pass
 
-        
-       
+
+"""
+j =1
+for i in stock_no_list:
+        try:
+                golden_cross_true_or_false = BestFourPoint(Stock(i)).golden_cross() #判斷黃金交叉
+                # 今天以前的五天內五日均線小於20日均線,但是今天5日均線高於20日均線,故今天為黃金交叉
+                if golden_cross_true_or_false:
+                        print i
+                        fileopen.write(str(j)+' '+'黃金交叉-Buy'+' '+i+' ('+Stock_no_name[i].encode("UTF-8")+')'+'\n')
+        except:
+                pass
+"""
+
+
+
+ 
 fileopen.write('\n\n\n上櫃公司股票篩選\n\n\n')
 
 """
