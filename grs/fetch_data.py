@@ -459,17 +459,16 @@ class SimpleAnalytics(object):
         """五日均線向上交叉20日均線(需回測n天)
            back_to_test_n_days為回測幾天 
         """
-        sample_data = data[-back_to_test_n_days:]
+        #sample_data = data[-back_to_test_n_days:]
+        sample_data = data[len(back_to_test_n_days)-back_to_test_n_days:len(back_to_test_n_days)-1] #不包含今天
+
         if positive_or_negative:  # 正
             ckvalue = max(sample_data)  # 尋找最大值
             preckvalue = max(sample_data) > 0  # 區間最大值必須為正
         else:
             ckvalue = min(sample_data)  # 尋找最小值
             preckvalue = max(sample_data) < 0  # 區間最大值必須為負
-        return (back_to_test_n_days - sample_data.index(ckvalue) < 4 and \
-                sample_data.index(ckvalue) != back_to_test_n_days - 1 and preckvalue,
-                back_to_test_n_days - sample_data.index(ckvalue) - 1,
-                ckvalue)
+        return preckvalue 
 
 
 

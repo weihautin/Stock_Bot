@@ -51,14 +51,18 @@ class BestFourPoint(object):
 
        # return self.data.golden_cross_5_20(tmp, sample)
 
-    def golden_cross_old(self):
-        """ 5日均線高於20日均線(黃金交叉),前五日五日均線皆低於20日均線
+    def golden_cross_no_back_test(self, m, n):
+        """ m日均線高於n日均線(黃金交叉)
 
         """
+        return self.data.moving_average(m)[0][-1] >  self.data.moving_average(n)[0][-1] and \
+               self.data.moving_average(m)[0][-2] <= self.data.moving_average(n)[0][-2]
 
-        return self.data.check_moving_average_bias_ratio(
-                               self.data.moving_average_bias_ratio(5, 20)[0])[0] \
-               and self.data.moving_average(5)[0][-1] >  self.data.moving_average(20)[0][-1] 
+
+
+#        return self.data.check_moving_average_bias_ratio(
+#                               self.data.moving_average_bias_ratio(m, n)[0])[0] \
+#               and self.data.moving_average(m)[0][-1] >  self.data.moving_average(n)[0][-1] 
 
 
     def check_plus_bias_ratio(self):
@@ -186,4 +190,4 @@ class BestFourPoint(object):
         elif sell:
             return False, sell
 
-        return None ,None
+        return None 
