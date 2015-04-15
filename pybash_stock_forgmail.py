@@ -43,7 +43,7 @@ PW = f.readline().strip('\n')
 
 fileopen.write('上市公司股票篩選\n\n\n')
 
-
+"""
 j = 1
 for i in stock_no_list:
     #print i, '上市', Stock_no_name[i]
@@ -63,19 +63,29 @@ for i in stock_no_list:
             j+=1
     except:     # 不作為或資料不足
         pass
-
+"""
         
-"""    
+"""
 j = 1
 for i in stock_no_list:
     try:
         best_point, info = BestFourPoint(Stock(i)).best_four_point()
+        # 要執行這段程式 best_buy_or_sell.py下的best_four_point 要改成 return None ,None
     except ValueError: #印出三個月內有資料不足的股票,可能當日都沒交易傳回 - 字串
         print 'ValueError',i 
+        # 顯示ValueError表示該各股兩個月內有其中一天沒交易量,所以抓到字串" - "
     else:
 	pass
 """
 
+j = 1
+for i in stock_no_list:
+    
+    try:
+        if BestFourPoint(Stock(i)).golden_cross(back_to_test_n_days=15)[0]:
+            print i
+    except:     # 回傳為None 或 資料不足導致ValueError
+        pass
 
         
        

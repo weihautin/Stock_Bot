@@ -431,17 +431,23 @@ class SimpleAnalytics(object):
                 ckvalue)
 	
     @classmethod
-    def golden_cross_5_20(cls, data, sample=5,
-                                  positive_or_negative=False):
-        """判斷轉折點位置
-
-           :param list data: 計算資料
-           :param int sample: 計算的區間樣本數量
-           :param bool positive_or_negative: 正乖離 為 True，負乖離 為 False
-           :rtype: tuple
-           :returns: (True or False, 第幾個轉折日, 轉折點值)
+    def golden_cross_5_20(cls,back_to_test_n_days, data, positive_or_negative=False):
+        """五日均線向上交叉20日均線(需回測n天)
+           back_to_test_n_days為回測幾天 
         """
-	return '123'       
+        sample_data = data[-back_to_test_n_days:]
+        if positive_or_negative:  # 正
+            ckvalue = max(sample_data)  # 尋找最大值
+            preckvalue = max(sample_data) > 0  # 區間最大值必須為正
+        else:
+            ckvalue = min(sample_data)  # 尋找最小值
+            preckvalue = max(sample_data) < 0  # 區間最大值必須為負
+        return (back_to_test_n_days - sample_data.index(ckvalue) < 4 and \
+                sample_data.index(ckvalue) != back_to_test_n_days - 1 and preckvalue,
+                back_to_test_n_days - sample_data.index(ckvalue) - 1,
+                ckvalue)
+
+
 
 
     @classmethod
