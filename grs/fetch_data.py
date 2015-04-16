@@ -299,7 +299,7 @@ class SimpleAnalytics(object):
         cal_data = self.__serial_price(row)
         result = []
         for dummy in range(len(cal_data) - int(date) + 1):
-            result.append(round(sum(cal_data[-date:]) / date, 2))
+            result.append(round(sum(cal_data[-date:]) / date, 3))
             cal_data.pop()
         result.reverse()
         cont = self.__cal_continue(result)
@@ -460,7 +460,7 @@ class SimpleAnalytics(object):
            back_to_test_n_days為回測幾天 
         """
         #sample_data = data[-back_to_test_n_days:]
-        sample_data = data[len(back_to_test_n_days)-back_to_test_n_days:len(back_to_test_n_days)-1] #不包含今天
+        sample_data = data[len(data)-back_to_test_n_days:len(data)-1] #不包含今天
 
         if positive_or_negative:  # 正
             ckvalue = max(sample_data)  # 尋找最大值

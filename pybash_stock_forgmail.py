@@ -80,14 +80,18 @@ for i in stock_no_list:
 
 fileopen.write("\n"+"新豪式黃金交叉定義:今天短均線高於長均線,且前回測N天中其短均線皆要低於長均線"+"\n\n")
 
+#新豪式黃金交叉定義:今天短均線高於長均線,且前回測N天中其短均線皆要低於長均線
+index = 1
 for i in stock_no_list:
     try:
-        if BestFourPoint(Stock(i)).golde_ratio_point()[0]:
-            print i,'123'            
-            # 5日均線黃金交叉20日均線,並且要回測20天.
-            fileopen.write('*'+' '+'黃金交叉-Buy'+' '+i+'\n')
+        if BestFourPoint(Stock(i)).golden_cross(m=5,n=20,back_to_test_n_days=10) and (BestFourPoint(Stock(i)).data.moving_average(5)[0][-1] >  BestFourPoint(Stock(i)).data.moving_average(20)[0][-1] ):
+           print i,'123'         # 5日均線黃金交叉20日均線,並且要回測10天.
+           fileopen.write(str(index)+" "+"新豪式黃金交叉(5日均線向上穿越20日均線回測10天)"+"-"+Stock_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]/1000))+"\n")
+           index = index + 1
     except:     # 回傳為None 或 資料不足導致ValueError
         pass
+
+
 #BestFourPoint(Stock(i)).golden_cross(m=5,n=20,back_to_test_n_days=10)
 #BestFourPoint(Stock(i)).data.moving_average(5)[0][-1] >  BestFourPoint(Stock(i)).data.moving_average(20)[0][-1] 
 """
