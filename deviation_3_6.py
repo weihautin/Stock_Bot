@@ -62,7 +62,6 @@ for i in stock_no_list:
  
 fileopen.write('\n\n\n上櫃公司股票篩選\n\n\n')
 
-"""
 j = 1
 for i in OTC_no_list:
     #print i,'上櫃', OTC_no_name[i]
@@ -70,28 +69,22 @@ for i in OTC_no_list:
         best_point, info = BestFourPoint(Stock(i)).best_four_point()
 
         if best_point:           # 買點
-            #fileopen.write(str(j)+' '+'Buy'+' '+i+' ('+OTC_no_name[i].encode("UTF-8")+')'\
-            #+'  成交張數  '+ str(Stock(i).raw[-1][1]) +                 '\n')
-
 
             txt = "%-2d Buy%6s%10s 成交張數:%-9d \n"%(j,i,OTC_no_name[i].encode("UTF-8"),Stock(i).raw[-1][1])
             fileopen.write(txt)
-
-
             fileopen.write(info.encode("UTF-8"))
             fileopen.write('\n\n')
             fileopen.write('----------------------------------\n')
             j+=1
     except:     # 不作為或資料不足
         pass
-"""   
+
 fileopen.close()                #關閉檔案
 
 
-"""
 os.system('sendEmail -o \
  -f u160895@taipower.com.tw \
- -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
+ -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw "u027425 <u027425@gmail.com>\
  -s smtp.gmail.com:587 \
  -xu %s \
  -xp %s \
@@ -99,7 +92,6 @@ os.system('sendEmail -o \
  -m %s \
  -a %s \
  '%(ID, PW, title, content, attachment))
-"""
 
  
  
