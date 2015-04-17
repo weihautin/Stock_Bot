@@ -52,8 +52,8 @@ class BestFourPoint(object):
        # return self.data.golden_cross_5_20(tmp, sample)
 
     def golden_cross_no_back_test(self, m, n):
-        """ m日均線高於n日均線(黃金交叉)
-
+        """
+        傳統黃金交叉,m日均線高於n日均線(黃金交叉)
         """
         return self.data.moving_average(m)[0][-1] >  self.data.moving_average(n)[0][-1] and \
                self.data.moving_average(m)[0][-2] <= self.data.moving_average(n)[0][-2]

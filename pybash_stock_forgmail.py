@@ -162,7 +162,7 @@ fileopen.close()                #關閉檔案
 
 os.system('sendEmail -o \
  -f u160895@taipower.com.tw \
- -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
+ -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw u027425@gmail.com \
  -s smtp.gmail.com:587 \
  -xu %s \
  -xp %s \

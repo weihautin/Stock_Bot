@@ -20,7 +20,11 @@ OTC_no_name = OTCNo().all_stock     # 所有上櫃股票名稱與代碼字典 ty
 
 stock_no_list = TWSENo().all_stock_no # 所有上市股票代碼
 
+#stock_name_list = TWSENo().all_stock_name
+
 OTC_no_list = OTCNo().all_stock_no # 所有上櫃股票代碼
+
+#OTC_name_list = OTCNo().all_stock_name
 
 
 content = "贏要衝,輸要縮."   #沒有辦法換行
@@ -38,59 +42,49 @@ PW = f.readline().strip('\n')
 
 
 fileopen.write('上市公司股票篩選\n\n\n')
+fileopen.write("3-6YY乖離判斷===>五天內的三日均價都要在六日均價之下, 且 MA(3)-MA(6)的值最大值不可以在第一天與第五天, 頭尾兩天不算轉折點\n\n.")
 
-
-
-fileopen.write("\n"+"傳統黃金交叉定義:昨天短均線低於長均線,今天短均線高於長均線"+"\n\n")
-
-
-#傳統黃金交叉(5日均線向上穿越10日均線)
-index = 1 
+j = 1
 for i in stock_no_list:
-    try: 
-        if BestFourPoint(Stock(i)).golden_cross_no_back_test(m=5,n=10):
-           fileopen.write(str(index)+" "+"傳統黃金交叉(5日均線向上穿越10日均線)"+"-"+Stock_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]/1000))+"\n")
-           index = index + 1 
-    except:     # 回傳為None 或 資料不足導致ValueError
+    #print i, '上市', Stock_no_name[i]
+    try:
+        best_point, info = BestFourPoint(Stock(i)).best_four_point()
+	if best_point:
+            fileopen.write(str(j)+' '+'Buy'+' '+i+' ('+Stock_no_name[i].encode("UTF-8")+')'+'  成交張數:'+str(int(Stock(i).raw[-1][1]/1000))+'\n')
+            fileopen.write('  '+info.encode("UTF-8"))
+            fileopen.write('\n\n')
+            fileopen.write('----------------------------------\n')
+            j+=1
+    except:     # 不作為或資料不足
         pass
-fileopen.write("\n\n")
-
-
-
-#傳統黃金交叉(5日均線向上穿越20日均線)
-index = 1
-for i in stock_no_list:
-    try: 
-        if BestFourPoint(Stock(i)).golden_cross_no_back_test(m=5,n=20):
-           fileopen.write(str(index)+" "+"傳統黃金交叉(5日均線向上穿越20日均線)"+"-"+Stock_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]/1000))+"\n")
-           index = index + 1
-    except:     # 回傳為None 或 資料不足導致ValueError
-        pass
-fileopen.write("\n\n")
-
-
-
-
-
+#fileopen.write('  成交張數:'+str(int(Stock(i).raw[-1][1]/1000))+'\n')
 
  
 fileopen.write('\n\n\n上櫃公司股票篩選\n\n\n')
 
-
-#傳統黃金交叉(5日均線向上穿越10日均線)
-index = 1
+"""
+j = 1
 for i in OTC_no_list:
+    #print i,'上櫃', OTC_no_name[i]
     try:
-        if BestFourPoint(Stock(i)).golden_cross_no_back_test(m=5,n=20):
-           fileopen.write(str(index)+" "+"傳統黃金交叉(5日均線向上穿越20日均線)"+"-"+OTC_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]))+"\n")
-           index = index + 1
-    except:     # 回傳為None 或 資料不足導致ValueError
+        best_point, info = BestFourPoint(Stock(i)).best_four_point()
+
+        if best_point:           # 買點
+            #fileopen.write(str(j)+' '+'Buy'+' '+i+' ('+OTC_no_name[i].encode("UTF-8")+')'\
+            #+'  成交張數  '+ str(Stock(i).raw[-1][1]) +                 '\n')
+
+
+            txt = "%-2d Buy%6s%10s 成交張數:%-9d \n"%(j,i,OTC_no_name[i].encode("UTF-8"),Stock(i).raw[-1][1])
+            fileopen.write(txt)
+
+
+            fileopen.write(info.encode("UTF-8"))
+            fileopen.write('\n\n')
+            fileopen.write('----------------------------------\n')
+            j+=1
+    except:     # 不作為或資料不足
         pass
-fileopen.write("\n\n")
-
-
-
-
+"""   
 fileopen.close()                #關閉檔案
 
 
