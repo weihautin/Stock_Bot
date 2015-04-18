@@ -74,6 +74,85 @@ class BestFourPoint(object):
         return self.bias_ratio()
 
     ##### 四大買點 #####
+
+    def today_great_ma5(self, ntimes):
+	""" 今天量大於昨天前的五日均量N倍
+	"""
+        result = ( self.data.value[-1] / self.data.moving_average_value(5)[0][-2] ) > ntimes and \
+                 self.data.price[-1] > self.data.openprice[-1] and self.data.value[-1] > 1000 
+        return result
+
+
+    def y_v_t_r(self):
+        """ 昨天暴量長紅,今天又上漲
+        """
+        result = self.data.value[-2] > self.data.value[-3] and self.data.price[-2] > self.data.openprice[-2] and \
+                 self.data.price[-1]/self.data.price[-2] > 1.03  and self.data.price[-1]/self.data.price[-2] < 1.065 and self.data.value[-1] > 500
+        return result
+	
+
+
+    def red_2(self):
+        """ 量大收紅(今日量>昨日量 and 收盤價格>開盤價格 and 負乖離股價在移動平均線下)
+        """
+        result = self.data.value[-1] > self.data.value[-2] and self.data.price[-1] > self.data.openprice[-1] and \
+                 self.data.value[-2] > self.data.value[-3] and self.data.price[-2] > self.data.openprice[-2]
+        return result
+
+    def red_3(self):
+        """ 量大收紅(今日量>昨日量 and 收盤價格>開盤價格 and 負乖離股價在移動平均線下)
+        """
+        result = self.data.value[-1] > self.data.value[-2] and self.data.price[-1] > self.data.openprice[-1] and \
+                 self.data.value[-2] > self.data.value[-3] and self.data.price[-2] > self.data.openprice[-2] and \
+                 self.data.value[-3] > self.data.value[-4] and self.data.price[-3] > self.data.openprice[-3]
+        return result
+
+    def red_4(self):
+        """ 量大收紅(今日量>昨日量 and 收盤價格>開盤價格 and 負乖離股價在移動平均線下)
+        """
+        result = self.data.value[-1] > self.data.value[-2] and self.data.price[-1] > self.data.openprice[-1] and \
+                 self.data.value[-2] > self.data.value[-3] and self.data.price[-2] > self.data.openprice[-2] and \
+                 self.data.value[-3] > self.data.value[-4] and self.data.price[-3] > self.data.openprice[-3] and \
+                 self.data.value[-4] > self.data.value[-5] and self.data.price[-4] > self.data.openprice[-4]
+        return result
+
+    def black_2(self):
+        """ 量大收黑(今日量>昨日量,今日收盤)
+        """
+        result = self.data.value[-1] > self.data.value[-2] and self.data.price[-1] < self.data.openprice[-1] and\
+                 self.data.value[-2] > self.data.value[-3] and self.data.price[-2] < self.data.openprice[-2] 
+        return result
+
+
+    def black_3(self):
+        """ 量大收黑(今日量>昨日量,今日收盤)
+        """
+        result = self.data.value[-1] > self.data.value[-2] and self.data.price[-1] < self.data.openprice[-1] and\
+                 self.data.value[-2] > self.data.value[-3] and self.data.price[-2] < self.data.openprice[-2] and\
+                 self.data.value[-3] > self.data.value[-4] and self.data.price[-3] < self.data.openprice[-3]
+        return result
+
+    def black_4(self):
+        """ 量大收黑(今日量>昨日量,今日收盤)
+        """
+        result = self.data.value[-1] > self.data.value[-2] and self.data.price[-1] < self.data.openprice[-1] and\
+                 self.data.value[-2] > self.data.value[-3] and self.data.price[-2] < self.data.openprice[-2] and\
+                 self.data.value[-3] > self.data.value[-4] and self.data.price[-3] < self.data.openprice[-3] and\
+                 self.data.value[-4] > self.data.value[-5] and self.data.price[-4] < self.data.openprice[-4]
+        return result
+
+    def black_5(self):
+        """ 量大收黑(今日量>昨日量,今日收盤)
+        """
+        result = self.data.value[-1] > self.data.value[-2] and self.data.price[-1] < self.data.openprice[-1] and\
+                 self.data.value[-2] > self.data.value[-3] and self.data.price[-2] < self.data.openprice[-2] and\
+                 self.data.value[-3] > self.data.value[-4] and self.data.price[-3] < self.data.openprice[-3] and\
+                 self.data.value[-4] > self.data.value[-5] and self.data.price[-4] < self.data.openprice[-4] and\
+                 self.data.value[-5] > self.data.value[-6] and self.data.price[-5] < self.data.openprice[-5]
+        return result
+
+
+
     def best_buy_1(self):
         """ 量大收紅(今日量>昨日量 and 收盤價格>開盤價格 and 負乖離股價在移動平均線下)
         """

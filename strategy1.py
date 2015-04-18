@@ -44,63 +44,30 @@ PW = f.readline().strip('\n')
 fileopen.write('上市公司股票篩選\n\n\n')
 
 
-fileopen.write("\n""+暴量長紅2天"+"\n\n")
+fileopen.write("\n""+昨天暴量長紅,今天又上漲"+"\n\n")
 
 #=====================
 index = 1 
 for i in stock_no_list:
     try:
-        if BestFourPoint(Stock(i)).red_3():
+        if BestFourPoint(Stock(i)).y_v_t_r():
            print i,'123'         #暴量長紅2天
-           fileopen.write(str(index)+" "+"暴量長紅2天"+"-"+Stock_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]/1000))+"\n")
+           fileopen.write(str(index)+" "+"昨天暴量長紅(昨天量>前天量,昨天收盤價>昨天開盤價),今天又上漲3%以上又不可以漲停,今日成交張數要大於800張"+"-"+Stock_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]/1000))+"\n")
            index = index + 1 
     except:     # 回傳為None 或 資料不足導致ValueError
         pass
 
-
-for i in stock_no_list:
-    try:
-        if BestFourPoint(Stock(i)).black_3():
-           print i,'123'         #暴量收黑3天
-           fileopen.write(str(index)+" "+"暴量收黑3天"+"-"+Stock_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]/1000))+"\n")
-           index = index + 1
-    except:     # 回傳為None 或 資料不足導致ValueError
-        pass
-
-for i in stock_no_list:
-    try:
-        if BestFourPoint(Stock(i)).black_4():
-           print i,'123'         #暴量收黑4天
-           fileopen.write(str(index)+" "+"暴量收黑4天"+"-"+Stock_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]/1000))+"\n")
-           index = index + 1
-    except:     # 回傳為None 或 資料不足導致ValueError
-        pass
-
-for i in stock_no_list:
-    try:
-        if BestFourPoint(Stock(i)).black_5():
-           print i,'123'         #暴量收黑5天
-           fileopen.write(str(index)+" "+"暴量收黑5天"+"-"+Stock_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]/1000))+"\n")
-           index = index + 1
-    except:     # 回傳為None 或 資料不足導致ValueError
-        pass
-
-
-
-
-
-
-fileopen.write('\n\n\n上櫃公司股票篩選\n\n\n')
-
+#=====================
+index = 1 
 for i in OTC_no_list:
+    print i
     try:
-        if BestFourPoint(Stock(i)).black_3():
-           print i,'123'         #暴量收黑3天
-           fileopen.write(str(index)+" "+"暴量收黑3天"+"-"+OTC_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]/1000))+"\n")
-           index = index + 1
+        if BestFourPoint(Stock(i)).y_v_t_r():
+           print i,'123'         #暴量長紅2天
+           fileopen.write(str(index)+" "+"昨天暴量長紅(昨天量>前天量,昨天收盤價>昨天開盤價),今天又上漲3%以上又不可以漲停,今日成交張數要大於800張"+"-"+OTC_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]))+"\n")
+           index = index + 1 
     except:     # 回傳為None 或 資料不足導致ValueError
         pass
-
 
 
 """
@@ -201,7 +168,6 @@ for i in OTC_no_list:
 fileopen.close()                #關閉檔案
 
 
-"""
 os.system('sendEmail -o \
  -f u160895@taipower.com.tw \
  -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
@@ -212,7 +178,6 @@ os.system('sendEmail -o \
  -m %s \
  -a %s \
  '%(ID, PW, title, content, attachment))
-"""
 
  
  
