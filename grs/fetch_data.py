@@ -66,6 +66,7 @@ class FetchData(object):
         self.__get_no = stock_no
         self._twse = twse
         for i in range(month):
+
             nowdatetime = datetime.today() - relativedelta(months=i)
             tolist = self.to_list(self.fetch_data(stock_no, nowdatetime))
             result = tolist + result
