@@ -521,8 +521,7 @@ class Stock(object):
         assert not twse == otc == True, 'Only `twse` or `otc` to be True'
 
         if twse and not otc:
-           # stock_proxy = type('Stock', (TWSEFetch, SimpleAnalytics), {})(
-            stock_proxy = Stock(TWSEFetch, SimpleAnalytics)
+            stock_proxy = type('Stock', (TWSEFetch, SimpleAnalytics), {})()
             twse = True
         elif not twse and otc:
             stock_proxy = type('Stock', (OTCFetch, SimpleAnalytics), {})()
