@@ -60,7 +60,7 @@ for i in stock_no_list:
 #=====================
 index = 1 
 for i in OTC_no_list:
-    print i
+    #print i
     try:
         if BestFourPoint(Stock(i)).y_v_t_r():
            print i,'123'         #暴量長紅2天
