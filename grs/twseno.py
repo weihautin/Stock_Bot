@@ -187,13 +187,13 @@ class ImportCSV(object):
 class TWSENo(ImportCSV):
     """ 上市股票代碼與搜尋 """
     def __init__(self):
-        super(TWSENo, self).__init__('twse_list_dev.csv', 'industry_code.csv')
+        super(TWSENo, self).__init__('twse_list.csv', 'industry_code.csv')
 
 
 class OTCNo(ImportCSV):
     """ 上櫃股票(OTC, Over-the-counter) 代碼與搜尋"""
     def __init__(self):
-        super(OTCNo, self).__init__('otc_list_dev.csv', 'industry_code_otc.csv')
+        super(OTCNo, self).__init__('otc_list.csv', 'industry_code_otc.csv')
 
 
 if __name__ == '__main__':

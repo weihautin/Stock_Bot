@@ -42,15 +42,15 @@ PW = f.readline().strip('\n')
 
 
 fileopen.write('上市公司股票篩選\n\n\n')
-fileopen.write("3-6YY乖離判斷===>五天內的三日均價都要在六日均價之下, 且 MA(3)-MA(6)的值最大值不可以在第一天與第五天, 頭尾兩天不算轉折點\n\n.")
+fileopen.write("3-6YY乖離判斷===>五天內的三日均價都要在六日均價之下, 且 MA(3)-MA(6)的值最大值不可以在第一天與第五天, 頭尾兩天不算轉折點\n\n")
 
 j = 1
 for i in stock_no_list:
     #print i, '上市', Stock_no_name[i]
     try:
-        best_point, info = BestFourPoint(Stock(i)).best_four_point()
+        best_point, info = BestFourPoint(Stock(i,mons=1)).best_four_point()
 	if best_point:
-            fileopen.write(str(j)+' '+'Buy'+' '+i+' ('+Stock_no_name[i].encode("UTF-8")+')'+'  成交張數:'+str(int(Stock(i).raw[-1][1]/1000))+'\n')
+            fileopen.write(str(j)+' '+'Buy'+' '+i+' ('+Stock_no_name[i].encode("UTF-8")+')'+'  成交張數:'+str(int(Stock(i,mons=1).raw[-1][1]/1000))+'\n')
             fileopen.write('  '+info.encode("UTF-8"))
             fileopen.write('\n\n')
             fileopen.write('----------------------------------\n')
@@ -66,11 +66,11 @@ j = 1
 for i in OTC_no_list:
     #print i,'上櫃', OTC_no_name[i]
     try:
-        best_point, info = BestFourPoint(Stock(i)).best_four_point()
+        best_point, info = BestFourPoint(Stock(i,mons=1)).best_four_point()
 
         if best_point:           # 買點
 
-            txt = "%-2d Buy%6s%10s 成交張數:%-9d \n"%(j,i,OTC_no_name[i].encode("UTF-8"),Stock(i).raw[-1][1])
+            txt = "%-2d Buy%6s%10s 成交張數:%-9d \n"%(j,i,OTC_no_name[i].encode("UTF-8"),Stock(i,mons=1).raw[-1][1])
             fileopen.write(txt)
             fileopen.write(info.encode("UTF-8"))
             fileopen.write('\n\n')
@@ -84,7 +84,7 @@ fileopen.close()                #關閉檔案
 
 os.system('sendEmail -o \
  -f u160895@taipower.com.tw \
- -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw "u027425 <u027425@gmail.com>\
+ -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
  -s smtp.gmail.com:587 \
  -xu %s \
  -xp %s \

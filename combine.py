@@ -12,6 +12,9 @@ from grs import BestFourPoint
 from grs import Stock
 from grs import TWSENo
 from grs import OTCNo
+from csvv import yields as fields #殖益率
+from sell_buy_immediately import stock_buy_sell_oneday as oneday #是否為現股當充
+
 
 
 Stock_no_name = TWSENo().all_stock  # 所有上市股票名稱與代碼字典 type: dict
@@ -49,10 +52,44 @@ fileopen.write("\n""+昨天暴量長紅,今天又上漲"+"\n\n")
 #=====================
 index = 1 
 for i in stock_no_list:
+    #print i
     try:
-        if BestFourPoint(Stock(i)).y_v_t_r():
+        if BestFourPoint(Stock(i,mons=1)).y_v_t_r():
            print i,'123'         #暴量長紅2天
-           fileopen.write(str(index)+" "+"昨天暴量長紅(昨天量>前天量,昨天收盤價>昨天開盤價),今天又上漲3%以上又不可以漲停,今日成交張數要大於800張"+"-"+Stock_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]/1000))+"\n")
+           try:
+               if oneday()[i][1] == '':
+	          one_day = "買賣現沖 "
+               elif oneday()[i][1] =='Y':
+                  one_day = "先買現沖"
+               else:
+                  one_day = ""
+           except:
+               one_day = "" #csv找不到該股票代碼,即不開放買賣現沖
+
+           fileopen.write(str(index)+" "+"昨天暴量長紅(昨天量>前天量,昨天收盤價>昨天開盤價),今天又上漲1~2%,今日成交張數要大於1000張"+"-"+Stock_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]/1000))+"-"+"殖益率"+str(fields()[i][2])+"-"+one_day+"\n")
+           index = index + 1 
+    except:     # 回傳為None 或 資料不足導致ValueError
+        pass
+
+#=====================
+index = 1 
+for i in OTC_no_list:
+    #print i
+    #print type(i)
+    try:
+        if BestFourPoint(Stock(i,mons=1)).y_v_t_r():
+           print i,'123'         #暴量長紅2天
+           try:
+               if oneday()[i][1] == '': 
+                  one_day = "買賣現沖 "
+               elif oneday()[i][1] =='Y':
+                  one_day = "先買現沖"
+               else:
+                  one_day = ""
+           except:
+               one_day = "" #csv找不到該股票代碼,即不開放買賣現沖
+
+           fileopen.write(str(index)+" "+"昨天暴量長紅(昨天量>前天量,昨天收盤價>昨天開盤價),今天又上漲1~2%,今日成交張數要大於1000張"+"-"+OTC_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]))+"-"+"殖益率"+str(fields()[i][2])+"-"+one_day+"\n")
            index = index + 1 
     except:     # 回傳為None 或 資料不足導致ValueError
         pass
@@ -158,7 +195,7 @@ fileopen.close()                #關閉檔案
 """
 os.system('sendEmail -o \
  -f u160895@taipower.com.tw \
- -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw u027425@gmail.com \
+ -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
  -s smtp.gmail.com:587 \
  -xu %s \
  -xp %s \
@@ -167,6 +204,7 @@ os.system('sendEmail -o \
  -a %s \
  '%(ID, PW, title, content, attachment))
 """
+
  
  
  
