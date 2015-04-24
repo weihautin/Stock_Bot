@@ -232,9 +232,10 @@ class RealtimeWeight(object):
 if __name__ == '__main__':
     from pprint import pprint
     #realtime_data = RealtimeTWSE(1201, datetime(2014, 6, 6))
-    realtime_data = RealtimeTWSE(1201)
+    realtime_data = RealtimeTWSE(1101)
     #pprint(realtime_data.raw)
     pprint(realtime_data.data)
+    # realtime_data.data['1101']['volume_acc']
     #pprint(RealtimeOTC(8446, datetime(2014, 6, 5)).data)
     #realtime_weight = RealtimeWeight(datetime(2014, 6, 6))
     realtime_weight = RealtimeWeight()
