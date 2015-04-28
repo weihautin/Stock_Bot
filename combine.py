@@ -13,7 +13,9 @@ from grs import Stock
 from grs import TWSENo
 from grs import OTCNo
 from csvv import yields as fields #殖益率
+from csvv import yields_otc as fields_otc #殖益率
 from sell_buy_immediately import stock_buy_sell_oneday as oneday #是否為現股當充
+
 
 
 
@@ -89,7 +91,7 @@ for i in OTC_no_list:
            except:
                one_day = "" #csv找不到該股票代碼,即不開放買賣現沖
 
-           fileopen.write(str(index)+" "+"昨天暴量長紅(昨天量>前天量,昨天收盤價>昨天開盤價),今天又上漲1~2%,今日成交張數要大於1000張"+"-"+OTC_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]))+"-"+"殖益率"+str(fields()[i][2])+"-"+one_day+"\n")
+           fileopen.write(str(index)+" "+"昨天暴量長紅(昨天量>前天量,昨天收盤價>昨天開盤價),今天又上漲1~2%,今日成交張數要大於1000張"+"-"+OTC_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]))+"-"+"殖益率"+str(fields_otc()[i][2])+"-"+one_day+"\n")
            index = index + 1 
     except:     # 回傳為None 或 資料不足導致ValueError
         pass

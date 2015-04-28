@@ -25,7 +25,6 @@ def stock_buy_sell_oneday():
     return buy_sell_oneday_dict 
     
 
-
 if __name__ == "__main__":
 
     a = stock_buy_sell_oneday()

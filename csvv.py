@@ -24,6 +24,22 @@ def yields():
     f.close()
     return twse_yields
     
+def yields_otc():
+    """
+    回傳dict:[股票名稱, 本益比, 殖利率(%), 股價淨值比]
+    回傳dict:[台泥utf8, '14.93', '5.69', '1.37']
+    EX: a['1101'] = [u'\u53f0\u6ce5', '14.93', '5.69', '1.37']
+    """
+    twse_yields = {}
+    f = open('otc_fields.csv','r')
+    for row in csv.reader(f):
+        try:
+            twse_yields[row[0]]=[row[1].decode('Big5'),row[2],row[3],row[4]]
+        except:
+            pass
+    f.close()
+    return twse_yields
+    
 
 
 if __name__ == "__main__":
