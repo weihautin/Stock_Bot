@@ -30,7 +30,7 @@ OTC_no_list = OTCNo().all_stock_no # 所有上櫃股票代碼
 content = "贏要衝,輸要縮."   #沒有辦法換行
 
 time_now = datetime.now().strftime("%Y-%m%d") #今天的日期 ex:2015-0411
-title = str(time_now+"-小小兵盤後機器人") #Email郵件的標題 ex:2015-0411-選股機器人
+title = str(time_now+"-今日各股漲跌幅度統計") #Email郵件的標題 ex:2015-0411-選股機器人
 
 attachment = str(time_now)+'percent.txt' #附件名稱使用當日時間 ex:2015-0411.txt
 

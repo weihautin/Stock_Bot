@@ -35,7 +35,7 @@ OTC_no_list = OTCNo().all_stock_no # 所有上櫃股票代碼
 content = "贏要衝,輸要縮."   #沒有辦法換行
 
 time_now = datetime.now().strftime("%Y%m%d_%H%M%S") #今天的日期 ex:2015-0411
-title = str(time_now+"-小小兵盤後機器人") #Email郵件的標題 ex:2015-0411-選股機器人
+title = str(time_now+"-明天標的股") #Email郵件的標題 ex:2015-0411-選股機器人
 
 attachment = str(time_now)+'.txt' #附件名稱使用當日時間 ex:2015-0411.txt
 
@@ -78,9 +78,10 @@ index = 1
 for i in OTC_no_list:
     #print i
     #print type(i)
+    print i
     try:
         if BestFourPoint(Stock(i,mons=1)).y_v_t_r():
-           print i,'123'         #暴量長紅2天
+           print i,'123OTC'         #暴量長紅2天
            try:
                if oneday()[i][1] == '': 
                   one_day = "買賣現沖 "
@@ -194,7 +195,6 @@ for i in OTC_no_list:
 """   
 fileopen.close()                #關閉檔案
 
-"""
 os.system('sendEmail -o \
  -f u160895@taipower.com.tw \
  -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
@@ -205,7 +205,6 @@ os.system('sendEmail -o \
  -m %s \
  -a %s \
  '%(ID, PW, title, content, attachment))
-"""
 
  
  
