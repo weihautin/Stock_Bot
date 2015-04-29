@@ -19,8 +19,8 @@ stock_no_list = TWSENo().all_stock_no # 所有上市股票代碼
 
 
 content = "贏要衝,輸要縮."   #沒有辦法換行
-time_now = datetime.now().strftime("%Y-%m%d-%H%M") #今天的日期 ex:2015-0411
-title = str(time_now+"-盤中即時機器人") #Email郵件的標題 ex:2015-0411-選股機器人
+time_now = datetime.now().strftime("%Y%m%d-%H%M") #今天的日期 ex:2015-0411
+title = str(time_now+"-盤中即時成交量機器人") #Email郵件的標題 ex:2015-0411-選股機器人
 
 attachment = str(time_now)+'.csv' #附件名稱使用當日時間 ex:2015-0411.txt
 
@@ -34,6 +34,7 @@ PW = f.readline().strip('\n')
 
 fileopen.write('上市公司股票篩選\n\n\n')
 
+#fileopen.write("股票",",","100",",","倍週均量",",","成交張數",",","殖利率","100",",","倍月均量")
 
 
 #=====================
@@ -59,9 +60,10 @@ for i in stock_no_list:
 
            fileopen.write(i+"-"+Stock_no_name[i].encode("UTF-8")+"-"+"目前累積成交量"+","+        \
            str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=1).moving_average_value(5)[0][-2]))+","+"倍週均量"+  \
-        ","+ "成交張數"+"-"+str(int(Stock(i,mons=1).raw[-1][1]/1000))+","+"殖益率"+str(fields()[i][2])+"-"+one_day+ \
+        ","+ "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率"+str(fields()[i][2])+"-"+one_day+ \
         ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=2).moving_average_value(20)[0][-2]))+","+"倍月均量"+ \
                                                                                             "\n")
+# str(int(Stock(i,mons=1).raw[-1][1]/1000))
 
            index = index + 1
     except:     # 回傳為None 或 資料不足導致ValueError
@@ -78,6 +80,16 @@ fileopen.close()                #關閉檔案
 #print Stock('1101').raw[-2][1]/1000 #昨天的量
 
 
+os.system('sendEmail -o \
+ -f u160895@taipower.com.tw \
+ -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
+ -s smtp.gmail.com:587 \
+ -xu %s \
+ -xp %s \
+ -u %s \
+ -m %s \
+ -a %s \
+ '%(ID, PW, title, content, attachment))
 
 
 
