@@ -40,7 +40,7 @@ fileopen.write("\n"+"目前該股累積成交量>昨天成交量"+"\n\n")
 #=====================
 index = 1
 for i in stock_no_list:
-    print i
+    #print i
     realtime_data = RealtimeTWSE(i)
     try:
         if realtime_data.data[i]['volume_acc'] > Stock(i,mons=1).moving_average(5)[0][-1]: #今天的量大於5日週均量
