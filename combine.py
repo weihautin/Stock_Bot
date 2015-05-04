@@ -56,7 +56,7 @@ index = 1
 for i in stock_no_list:
     #print i
     try:
-        if BestFourPoint(Stock(i,mons=1)).y_v_t_r():
+        if BestFourPoint(Stock(i,mons=2)).y_v_t_r():
            print i,'123'         #暴量長紅2天
            try:
                if oneday()[i][1] == '':
@@ -80,7 +80,7 @@ for i in OTC_no_list:
     #print type(i)
     print i
     try:
-        if BestFourPoint(Stock(i,mons=1)).y_v_t_r():
+        if BestFourPoint(Stock(i,mons=2)).y_v_t_r():
            print i,'123OTC'         #暴量長紅2天
            try:
                if oneday()[i][1] == '': 

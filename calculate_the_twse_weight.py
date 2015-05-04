@@ -48,7 +48,7 @@ if __name__ == "__main__":
     b = Twse_Weighted_Index() #大盤加權指數
     #print int(b.Weighted_Index_average(1,b.serial_fetch(month=1))[-1])
 
-    today_weight = b.Weighted_Index_average(1,b.serial_fetch(month=1))[-1]    # -1今天收盤 -2昨天收盤
+    today_weight = b.Weighted_Index_average(1,b.serial_fetch(month=2))[-1]    # -1今天收盤 -2昨天收盤
     
     # Stock('1101').raw[-1][-2] 漲跌點數
     # Stock('1101').raw[-1][4] 昨天收盤價

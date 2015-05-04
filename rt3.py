@@ -5,6 +5,7 @@ Created on Fri Apr 24 13:22:59 2015
 @author: tim
 """
 
+import os
 from grs import RealtimeTWSE
 from datetime import datetime
 from grs import Stock
@@ -43,7 +44,7 @@ for i in stock_no_list:
     #print i
     realtime_data = RealtimeTWSE(i)
     try:
-        if realtime_data.data[i]['volume_acc'] > Stock(i,mons=1).moving_average_value(5)[0][-2] or realtime_data.data[i]['volume_acc'] > Stock(i,mons=2).moving_average_value(20)[0][-2]: #今天的量大於5日週均量
+        if realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(5)[0][-2] or realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(20)[0][-2]: #今天的量大於5日週均量
         #if realtime_data.data[i]['volume_acc'] > Stock(i,mons=1).raw[-2][1]/1000: #今天的量大於昨天的量 
            print i,'Yes123'         #暴量長紅2天
            try:
@@ -58,10 +59,11 @@ for i in stock_no_list:
 
 #           fileopen.write(str(index)+" "+time_now+"-----目前該股累積成交量>週均量"+"-"+Stock_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i,mons=1).raw[-1][1]/1000))+"-"+"殖益率"+str(fields()[i][2])+"-"+one_day+"\n")
 
+           fileopen.write('321')
            fileopen.write(i+"-"+Stock_no_name[i].encode("UTF-8")+"-"+"目前累積成交量"+","+        \
-           str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=1).moving_average_value(5)[0][-2]))+","+"倍週均量"+  \
+           str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]))+","+"倍週均量"+  \
         ","+ "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率"+str(fields()[i][2])+"-"+one_day+ \
-        ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=2).moving_average_value(20)[0][-2]))+","+"倍月均量"+ \
+        ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]))+","+"倍月均量"+ \
                                                                                             "\n")
 # str(int(Stock(i,mons=1).raw[-1][1]/1000))
 
