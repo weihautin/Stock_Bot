@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Spyder Editor
-
-This temporary script file is located here:
-/home/tim/.spyder2/.temp.py
+計算盤後週月季年線
 """
 
 import csv
@@ -12,6 +9,7 @@ import urllib3
 from datetime import datetime
 from cStringIO import StringIO
 from dateutil.relativedelta import relativedelta
+import os
 
 TWSE_HOST = 'http://www.twse.com.tw/'
 TWSE_CONNECTIONS = urllib3.connection_from_url(TWSE_HOST)
@@ -104,6 +102,19 @@ if __name__ == "__main__":
 #['104/04/20', 4912281564.0, 91460781461.0, 835649.0, 9552.85, -18.08]]
 #    0日期         1成交股數       2成交金額    3成交筆數  4加權指數   5漲跌
     
+    content = "贏要衝,輸要縮."   #沒有辦法換行
+    time_now = datetime.now().strftime("%Y%m%d-%H%M") #今天的日期 ex:2015-0411
+    title = str(time_now+"-盤後週月季年線") #Email郵件的標題 ex:2015-0411-選股機器人
+
+    attachment = str(time_now)+'.txt' #附件名稱使用當日時間 ex:2015-0411.txt
+
+    fileopen = open(attachment, 'w') #開啟檔案,w沒有該檔案就新增
+
+    f = open('/home/tim/GMAIL.txt','r') #於前一個相對目錄中放置登入GMAIL帳號密碼,目的為了不再GitHub顯示出來.
+    ID = f.readline().strip('\n') #不包含換行符號\n:q
+
+    PW = f.readline().strip('\n')
+
     a = Twse_Weighted_Index()
     #print a.serial_fetch(month=1)   
 
@@ -125,7 +136,26 @@ if __name__ == "__main__":
     
     print int(a.Weighted_Index_average(240,a.serial_fetch())[-1]),'年線'# 印出年線
   
-    
+    fileopen.write(str(int(a.Weighted_Index_average(3,a.serial_fetch())[-1]))+'-'+'三日均線'+'\n')
+    fileopen.write(str(int(a.Weighted_Index_average(5,a.serial_fetch())[-1]))+'-'+'週線'+'\n')
+    fileopen.write(str(int(a.Weighted_Index_average(10,a.serial_fetch())[-1]))+'-'+'雙週線'+'\n')
+    fileopen.write(str(int(a.Weighted_Index_average(20,a.serial_fetch())[-1]))+'-'+'月線'+'\n')
+    fileopen.write(str(int(a.Weighted_Index_average(60,a.serial_fetch())[-1]))+'-'+'季線'+'\n')
+    fileopen.write(str(int(a.Weighted_Index_average(120,a.serial_fetch())[-1]))+'-'+'半年線'+'\n')
+    fileopen.write(str(int(a.Weighted_Index_average(240,a.serial_fetch())[-1]))+'-'+'年線'+'\n')
+
+    fileopen.close() 
+
+    os.system('sendEmail -o \
+    -f u160895@taipower.com.tw \
+    -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
+    -s smtp.gmail.com:587 \
+    -xu %s \
+    -xp %s \
+    -u %s \
+    -m %s \
+    -a %s \
+    '%(ID, PW, title, content, attachment))
     
    
     

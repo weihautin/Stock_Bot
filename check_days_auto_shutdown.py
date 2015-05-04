@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Apr 12 21:48:54 2015
-
-@author: tim
+判斷今天日否有開市
+更改/grs/opendate.csv檔案,檔案內的日期為非開市日
+週末為非開市日
+依據 http://www.twse.com.tw/ch/trading/trading_days.php
 """
 import os
 
@@ -14,7 +15,7 @@ from datetime import datetime
 open_or_not = TWSEOpen()
 
 if open_or_not.d_day(datetime.today()) == True:
-    print '123'
+    print '今天有開市'
     
 if open_or_not.d_day(datetime.today()) == False: #非開市日直接關機
     os.system('dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 "org.freedesktop.login1.Manager.PowerOff" boolean:true')

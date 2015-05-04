@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Apr  9 16:22:32 2015
-
-@author: tim
+豪氏黃金交叉
+五日均線要大於二十日均線,且要回測N天都符合
 """
 # 請先安裝 sudo apt-get install sendemail
 

@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Apr  9 16:22:32 2015
-
-@author: tim
+今天量大於昨天前的五日均量N倍,且今天量大長紅
 """
 # 請先安裝 sudo apt-get install sendemail
 

@@ -12,6 +12,11 @@ from grs import BestFourPoint
 from grs import Stock
 from grs import TWSENo
 from grs import OTCNo
+from csvv import yields as fields #殖益率
+from csvv import yields_otc as fields_otc #殖益率
+from sell_buy_immediately import stock_buy_sell_oneday as oneday #是否為現股當充
+
+
 
 
 Stock_no_name = TWSENo().all_stock  # 所有上市股票名稱與代碼字典 type: dict
@@ -29,8 +34,8 @@ OTC_no_list = OTCNo().all_stock_no # 所有上櫃股票代碼
 
 content = "贏要衝,輸要縮."   #沒有辦法換行
 
-time_now = datetime.now().strftime("%Y-%m%d") #今天的日期 ex:2015-0411
-title = str(time_now+"-小小兵盤後機器人") #Email郵件的標題 ex:2015-0411-選股機器人
+time_now = datetime.now().strftime("%Y%m%d_%H%M%S") #今天的日期 ex:2015-0411
+title = str(time_now+"-明天標的股") #Email郵件的標題 ex:2015-0411-選股機器人
 
 attachment = str(time_now)+'.txt' #附件名稱使用當日時間 ex:2015-0411.txt
 
@@ -42,6 +47,48 @@ PW = f.readline().strip('\n')
 
 
 fileopen.write('上市公司股票篩選\n\n\n')
+
+
+fileopen.write("\n""+昨天暴量長紅,今天又上漲"+"\n\n")
+
+#=====================
+index = 1 
+for i in stock_no_list:
+    #print i
+    try:
+        if BestFourPoint(Stock(i,mons=2)).y_v_t_r():
+           print i,'twse'         #暴量長紅2天
+           try:
+               if oneday()[i][1] == '':
+	          one_day = "買賣現沖 "
+               elif oneday()[i][1] =='Y':
+                  one_day = "先買現沖"
+               else:
+                  one_day = ""
+           except:
+               one_day = "" #csv找不到該股票代碼,即不開放買賣現沖
+
+           fileopen.write(str(index)+" "+"昨天暴量長紅,今天又上漲1~7%,成交張數要大於1000張"+"-"+Stock_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]/1000))+"-"+"殖益率"+str(fields()[i][2])+"-"+one_day+"\n")
+           index = index + 1 
+    except:     # 回傳為None 或 資料不足導致ValueError
+        pass
+
+#=====================
+
+fileopen.write('\n\n\n上櫃公司股票篩選\n\n\n')
+
+index = 1 
+for i in OTC_no_list:
+    #print i
+    try:
+        if BestFourPoint(Stock(i,mons=2)).otc_y_v_t_r():
+           print i,'otc'         #暴量長紅2天
+
+           fileopen.write(str(index)+" "+"昨天暴量長紅,今天又上漲1~7%,成交張數要大於1000張"+"-"+OTC_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]))+"-"+"殖益率"+str(fields_otc()[i][2])+"-"+"\n")
+           index = index + 1 
+    except:     # 回傳為None 或 資料不足導致ValueError
+        pass
+
 
 """
 j = 1
@@ -78,22 +125,8 @@ for i in stock_no_list:
 	pass
 """
 
-fileopen.write("\n"+"新豪式黃金交叉定義:今天短均線高於長均線,且回測N天內的短均線皆要低於長均線"+"\n\n")
-
-#新豪式黃金交叉定義:今天短均線高於長均線,且前回測N天中其短均線皆要低於長均線
-index = 1
-for i in stock_no_list:
-    try:
-        if BestFourPoint(Stock(i)).golden_cross(m=5,n=20,back_to_test_n_days=10) and (BestFourPoint(Stock(i)).data.moving_average(5)[0][-1] >  BestFourPoint(Stock(i)).data.moving_average(20)[0][-1] ):
-           print i,'123'         # 5日均線黃金交叉20日均線,並且要回測10天.
-           fileopen.write(str(index)+" "+"新豪式黃金交叉(5日均線向上穿越20日均線且符合10天回測)"+"-"+Stock_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]/1000))+"\n")
-           index = index + 1 
-    except:     # 回傳為None 或 資料不足導致ValueError
-        pass
 
 
-#BestFourPoint(Stock(i)).golden_cross(m=5,n=20,back_to_test_n_days=10)
-#BestFourPoint(Stock(i)).data.moving_average(5)[0][-1] >  BestFourPoint(Stock(i)).data.moving_average(20)[0][-1] 
 """
 fileopen.write("\n"+"傳統黃金交叉定義:昨天短均線低於長均線,今天短均線高於長均線"+"\n\n")
 
@@ -127,7 +160,6 @@ for i in stock_no_list:
 
 
  
-fileopen.write('\n\n\n上櫃公司股票篩選\n\n\n')
 
 """
 j = 1
@@ -154,8 +186,6 @@ for i in OTC_no_list:
 """   
 fileopen.close()                #關閉檔案
 
-
-"""
 os.system('sendEmail -o \
  -f u160895@taipower.com.tw \
  -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
@@ -166,7 +196,6 @@ os.system('sendEmail -o \
  -m %s \
  -a %s \
  '%(ID, PW, title, content, attachment))
-"""
 
  
  

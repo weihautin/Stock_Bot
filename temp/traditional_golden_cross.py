@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Apr  9 16:22:32 2015
-
-@author: tim
+傳統黃金交叉5日均線大於20日均線即可
 """
 # 請先安裝 sudo apt-get install sendemail
 
