@@ -62,7 +62,10 @@ if __name__ == "__main__":
     for i in a:
        
         contribution = 0
-        contribution = float(Stock(i[0]).raw[-1][-2]) / float(Stock(i[0]).raw[-2][-3]) * today_weight * float(i[2]) / 100
+        try:
+            contribution = float(Stock(i[0]).raw[-1][-2]) / float(Stock(i[0]).raw[-2][-3]) * today_weight * float(i[2]) / 100
+        except:
+            pass #抓到非數字跳過
         total = total + contribution
         
         print i[0],i[1],contribution,total      

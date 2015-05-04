@@ -67,7 +67,7 @@ twse_minus6_7 = []
 total_twse = 0 
 for i in stock_no_list:
     try:
-	percent = float(Stock(i,mons=1)._SimpleAnalytics__raw_data[-1][7]) / float(Stock(i,mons=1)._SimpleAnalytics__raw_data[-2][6])
+	percent = float(Stock(i,mons=2)._SimpleAnalytics__raw_data[-1][7]) / float(Stock(i,mons=2)._SimpleAnalytics__raw_data[-2][6])
         percent = percent * 100
 	if percent > 0 and percent < 1:
            twse_pos0_1.append(i)		
@@ -193,7 +193,7 @@ otc_minus6_7 = []
 total_otc = 0
 for i in OTC_no_list:
     try:
-        percent = float(Stock(i,mons=1)._SimpleAnalytics__raw_data[-1][7]) / float(Stock(i,mons=1)._SimpleAnalytics__raw_data[-2][6])
+        percent = float(Stock(i,mons=2)._SimpleAnalytics__raw_data[-1][7]) / float(Stock(i,mons=2)._SimpleAnalytics__raw_data[-2][6])
         percent = percent * 100 
         if percent > 0 and percent < 1:
            otc_pos0_1.append(i)    
