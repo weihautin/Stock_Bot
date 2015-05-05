@@ -38,7 +38,7 @@ ID = f.readline().strip('\n') #不包含換行符號\n:q
 
 PW = f.readline().strip('\n')
 
-"""
+
 fileopen.write('上市公司股票篩選\n\n\n')
 
 #fileopen.write("股票",",","100",",","倍週均量",",","成交張數",",","殖利率","100",",","倍月均量")
@@ -76,7 +76,7 @@ for i in stock_no_list:
     except:     # 回傳為None 或 資料不足導致ValueError
         pass
 
-"""
+
 
 
 fileopen.write('上櫃公司股票篩選\n\n\n')
@@ -91,12 +91,12 @@ for i in OTC_no_list:
         #if realtime_data.data[i]['volume_acc'] > Stock(i,mons=1).raw[-2][1]/1000: #今天的量大於昨天的量 
            print i,'OTC123'         #暴量長紅2天
 
-           fileopen.write(i+"-"+OTC_no_name[i].encode("UTF-8")+"-"+"目前累積成交量"+","+ \
+  	   fileopen.write(i+"-"+OTC_no_name[i].encode("UTF-8")+"-"+"目前累積成交量"+","+ \
            str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]*1000))+","+"倍週均量"+  \
-        ","+ "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率"+str(fields_otc()[i][2])+"-"+ \
-        ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]*1000))+","+"倍月均量"+ \
-                                                                                            "\n")
+	   ","+ "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率"+str(fields_otc()[i][2])+"-"+ \
+       	   ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]*1000))+","+"倍月均量"+ "\n")
 # str(int(Stock(i,mons=1).raw[-1][1]/1000))
+	    
 
            index = index + 1
     except:     # 回傳為None 或 資料不足導致ValueError
