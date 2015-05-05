@@ -14,9 +14,6 @@ from grs import OTCNo
 from csvv import yields as fields #TWSE殖益率
 from csvv import yields_otc as fields_otc #OTC殖益率
 from sell_buy_immediately import stock_buy_sell_oneday as oneday #是否為現股當充
-#from grs import yields as fields
-#from grs import yields_otc as fields_otc
-#from grs import stock_buy_sell_oneday as oneday
 
 
 Stock_no_name = TWSENo().all_stock  # 所有上市股票名稱與代碼字典 type: dict
@@ -54,6 +51,7 @@ for i in stock_no_list:
     realtime_data = RealtimeTWSE(i)
     try:
         if realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(5)[0][-2] or realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(20)[0][-2]: #今天的量大於5日週均量
+        #if realtime_data.data[i]['volume_acc'] > Stock(i,mons=1).raw[-2][1]/1000: #今天的量大於昨天的量 
            print i,'TWSE123'        #暴量長紅2天
            try:
                if oneday()[i][1] == '':
@@ -64,14 +62,15 @@ for i in stock_no_list:
                   one_day = ""
            except:
                one_day = "" #csv找不到該股票代碼,即不開放買賣現沖
-#           fileopen.write(i+"-"+Stock_no_name[i].encode("UTF-8")+"-"+"目前累積成交量"+","+        \
-#           str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]))+","+"倍週均量"+  \
-#           ","+ "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率"+str(fields()[i][2])+"-"+one_day+ \
-#           ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]))+","+"倍月均量"+ "\n")
-           fileopen.write(i+"-"+Stock_no_name[i].encode("UTF-8")+"-"+"目前累積成交量"+","+   \
+
+#           fileopen.write(str(index)+" "+time_now+"-----目前該股累積成交量>週均量"+"-"+Stock_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i,mons=1).raw[-1][1]/1000))+"-"+"殖益率"+str(fields()[i][2])+"-"+one_day+"\n")
+
+           fileopen.write(i+"-"+Stock_no_name[i].encode("UTF-8")+"-"+"目前累積成交量"+","+        \
            str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]))+","+"倍週均量"+  \
-           ","+ "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率"+str(fields()[i][2])+"-"+ \
-           ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]))+","+"倍月均量"+ "\n")
+        ","+ "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率"+str(fields()[i][2])+"-"+one_day+ \
+        ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]))+","+"倍月均量"+ \
+                                                                                            "\n")
+# str(int(Stock(i,mons=1).raw[-1][1]/1000))
 
            index = index + 1
     except:     # 回傳為None 或 資料不足導致ValueError
@@ -89,11 +88,16 @@ for i in OTC_no_list:
     realtime_data = RealtimeOTC(i)
     try:
         if realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(5)[0][-2]*1000 or realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(20)[0][-2]*1000: #今天的量大於5日週均量
+        #if realtime_data.data[i]['volume_acc'] > Stock(i,mons=1).raw[-2][1]/1000: #今天的量大於昨天的量 
            print i,'OTC123'         #暴量長紅2天
-       	   fileopen.write(i+"-"+OTC_no_name[i].encode("UTF-8")+"-"+"目前累積成交量"+","+ \
+
+  	   fileopen.write(i+"-"+OTC_no_name[i].encode("UTF-8")+"-"+"目前累積成交量"+","+ \
            str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]*1000))+","+"倍週均量"+  \
-           ","+ "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率"+"-"+ one_day + \
+	   ","+ "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率"+str(fields_otc()[i][2])+"-"+ \
        	   ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]*1000))+","+"倍月均量"+ "\n")
+# str(int(Stock(i,mons=1).raw[-1][1]/1000))
+	    
+
            index = index + 1
     except:     # 回傳為None 或 資料不足導致ValueError
         pass
@@ -102,6 +106,12 @@ for i in OTC_no_list:
 
 fileopen.close()                #關閉檔案
 
+#realtime_data = RealtimeTWSE(1101)
+
+
+
+#print realtime_data.data['1101']['volume_acc'] #今天的量
+#print Stock('1101').raw[-2][1]/1000 #昨天的量
 
 
 os.system('sendEmail -o \
@@ -114,7 +124,6 @@ os.system('sendEmail -o \
  -m %s \
  -a %s \
  '%(ID, PW, title, content, attachment))
-
 
 
 
