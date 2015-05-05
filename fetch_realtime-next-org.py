@@ -11,12 +11,12 @@ from datetime import datetime
 from grs import Stock
 from grs import TWSENo
 from grs import OTCNo
-#from csvv import yields as fields #TWSE殖益率
-#from csvv import yields_otc as fields_otc #OTC殖益率
-#from sell_buy_immediately import stock_buy_sell_oneday as oneday #是否為現股當充
-from grs import yields as fields
-from grs import yields_otc as fields_otc
-from grs import stock_buy_sell_oneday as oneday
+from csvv import yields as fields #TWSE殖益率
+from csvv import yields_otc as fields_otc #OTC殖益率
+from sell_buy_immediately import stock_buy_sell_oneday as oneday #是否為現股當充
+#from grs import yields as fields
+#from grs import yields_otc as fields_otc
+#from grs import stock_buy_sell_oneday as oneday
 
 
 Stock_no_name = TWSENo().all_stock  # 所有上市股票名稱與代碼字典 type: dict
@@ -64,11 +64,15 @@ for i in stock_no_list:
                   one_day = ""
            except:
                one_day = "" #csv找不到該股票代碼,即不開放買賣現沖
-           fileopen.write('123')
-           fileopen.write(i+"-"+Stock_no_name[i].encode("UTF-8")+"-"+"目前累積成交量"+","+        \
+#           fileopen.write(i+"-"+Stock_no_name[i].encode("UTF-8")+"-"+"目前累積成交量"+","+        \
+#           str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]))+","+"倍週均量"+  \
+#           ","+ "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率"+str(fields()[i][2])+"-"+one_day+ \
+#           ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]))+","+"倍月均量"+ "\n")
+           fileopen.write(i+"-"+Stock_no_name[i].encode("UTF-8")+"-"+"目前累積成交量"+","+   \
            str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]))+","+"倍週均量"+  \
-           ","+ "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+ \
-           +str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]))+","+"倍月均量"+ "\n")
+           ","+ "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率"+str(fields[i][2])+"-"+one_day+ \
+           ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]))+","+"倍月均量"+ "\n")
+
            index = index + 1
     except:     # 回傳為None 或 資料不足導致ValueError
         pass
@@ -88,8 +92,8 @@ for i in OTC_no_list:
            print i,'OTC123'         #暴量長紅2天
        	   fileopen.write(i+"-"+OTC_no_name[i].encode("UTF-8")+"-"+"目前累積成交量"+","+ \
            str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]*1000))+","+"倍週均量"+  \
-           ","+ "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+ \
-       	   +str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]*1000))+","+"倍月均量"+ "\n")
+           ","+ "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率"+str(fields_otc[i][2])+"-"+ \
+       	   ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]*1000))+","+"倍月均量"+ "\n")
            index = index + 1
     except:     # 回傳為None 或 資料不足導致ValueError
         pass
