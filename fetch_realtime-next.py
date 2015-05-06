@@ -55,21 +55,18 @@ for i in stock_no_list:
     try:
         if realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(5)[0][-2] or realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(20)[0][-2]: #今天的量大於5日週均量
            print i,'TWSE123'        #暴量長紅2天
-           try:
-               if oneday()[i][1] == '':
-                  one_day = "買賣現沖 "
-               elif oneday()[i][1] =='Y':
-                  one_day = "先買現沖"
-               else:
-                  one_day = ""
-           except:
-               one_day = "" #csv找不到該股票代碼,即不開放買賣現沖
-           fileopen.write('123')
+
            fileopen.write(i+"-"+Stock_no_name[i].encode("UTF-8")+"-"+"目前累積成交量"+","+        \
            str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]))+","+"倍週均量"+  \
-            "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+ \
-           +str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]))+","+"倍月均量"+ "\n")
-           index = index + 1
+           "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+ \
+           str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]))+","+"倍月均量"+ "\n")
+
+#           fileopen.write(i+"-"+Stock_no_name[i].encode("UTF-8")+ \
+#           str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]))+","+"倍週均量"+ \
+#           ","+ "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+  \
+#           str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]))+","+"倍月均量"+ "\n")
+
+
     except:     # 回傳為None 或 資料不足導致ValueError
         pass
 
@@ -89,7 +86,7 @@ for i in OTC_no_list:
        	   fileopen.write(i+"-"+OTC_no_name[i].encode("UTF-8")+"-"+"目前累積成交量"+","+ \
            str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]*1000))+","+"倍週均量"+  \
             "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+ \
-       	   +str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]*1000))+","+"倍月均量"+ "\n")
+       	   str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]*1000))+","+"倍月均量"+ "\n")
            index = index + 1
     except:     # 回傳為None 或 資料不足導致ValueError
         pass
