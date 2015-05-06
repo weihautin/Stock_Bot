@@ -47,7 +47,7 @@ fileopen.write('上市公司股票篩選\n\n\n')
 #=====================
 index = 1
 for i in stock_no_list:
-    print i
+    #print i
     realtime_data = RealtimeTWSE(i)
     try:
         if realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(5)[0][-2] or realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(20)[0][-2]: #今天的量大於5日週均量
