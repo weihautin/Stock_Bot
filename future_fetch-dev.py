@@ -33,10 +33,10 @@ else:
 f = open(u"today_future.txt",'w') #欲儲存資料的文字檔檔名
 f.write("開盤價         最高價         最低價         最後成交價     成交量         未沖銷契約量   日期\n") #文字檔標頭
 
-#fetch_year = [int(year)] # 想要哪何年資料,用逗號分隔
-#fetch_month = [int(month)-1,int(month)]   # 想要哪何月資料,用逗號分隔
-fetch_year = [2015]
-fetch_month = [5]
+fetch_year = [int(year)] # 想要哪何年資料,用逗號分隔
+fetch_month = [int(month)-1,int(month)]   # 想要哪何月資料,用逗號分隔
+#fetch_year = [2015]
+#fetch_month = [5]
 
 print u"正在連結期交所網站抓取資料，請稍等。抓取一個月的資料約10秒，需等待多久取決於抓取多少月份的資料"
 tmp = []
@@ -49,7 +49,7 @@ for iyear in fetch_year:
         imonth=str(imonth)
 
         j=1
-        while j <=8:
+        while j <=31:
           
             print iyear,imonth,j # 每連結一天,於螢幕列印該天日期.
             date = str(j)
@@ -96,12 +96,77 @@ for iyear in fetch_year:
           
             html.close()
         
+#f.close()
+
+
+# 今天的日期
+iyear =  strftime('%Y')
+imonth = strftime('%m')
+date = strftime('%d')
+
+
+
+tmp = []
+optionUrl = "http://www.taifex.com.tw/chinese/3/3_1_1.asp?goday=&syear="+iyear+"&smonth="+imonth+"&sday="+date+"&COMMODITY_ID=TX"  #連結期交所該天網頁
+
+html = urllib.urlopen(optionUrl)  #open file-like object
+
+regexp = re.compile(r"<TD align=right class=\"12bk\">(?P<file>.*)</TD>") #Compile a regular expression pattern, returning a pattern object., 成交價格
+check_date = re.compile(r"<h3 align=\'left\'>日期：(?P<file>.*)</h3>") # 該網頁的日期
+     
+# 正規表示式 (?P<file>.*)  一個括號裡面的東西為一個group
+     
+i = 0 #只抓前六筆符合的資料(開盤價 最高價 最低價  最後成交價 成交量  未沖銷契約量)
+for line in html.readlines():
+    result = regexp.search(line)
+    date_ck = check_date.search(line)
+    #search(string[, pos[, endpos]]) --> match object or None.
+    #Scan through string looking for a match, and return a corresponding
+    #MatchObject instance. Return None if no position in the string matches.
+
+
+    if result != None:   #列假日與國定假日都抓不到資料為None
+        fileName = result.group('file')  #參數可以打 'file'  或只打數字 1  變數regexp一個括號裡面的東西為一個group
+        i+=1
+
+        f.write('%-15s'%(fileName)) #儲存價格資料
+        tmp.append(fileName)
+        #future_list.append([fileName])
+
+    if i >= 6 :  #只抓前六筆符合的資料(開盤價 最高價 最低價  最後成交價 成交量  未沖銷契約量),超過前六筆資料後列印日期與跳出for迴圈
+        tmp.append('%s-%s-%s'%(iyear,imonth,date))
+        future_list.append(tmp)
+        f.write('%s-%s-%s'%(iyear,imonth,date))
+        tmp = []
+        break
+
+
+
+#i+=1
+html.close()
+
+
+
+
 f.close()
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 future_file = open(u"calculate_future_average.txt",'w')
 
+
+future_file.write("今天期貨收盤價==> %d"%(int(future_list[-1][3]))+"\n")
 
 ########
 total = 0  #三日均價
