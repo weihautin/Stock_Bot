@@ -58,8 +58,8 @@ for i in stock_no_list:
 
            fileopen.write(i+"-"+Stock_no_name[i].encode("UTF-8")+"-"+"目前累積成交量"+","+        \
            str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]))+","+"倍週均量"+  \
-           ","+"成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率"+str(fields()[i][2])+"-"+ \
-           ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]))+","+"倍月均量"+ "\n")
+           "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+ \
+           str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]))+","+"倍月均量"+ "\n")
 
 #           fileopen.write(i+"-"+Stock_no_name[i].encode("UTF-8")+ \
 #           str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]))+","+"倍週均量"+ \
@@ -85,8 +85,8 @@ for i in OTC_no_list:
            print i,'OTC123'         #暴量長紅2天
        	   fileopen.write(i+"-"+OTC_no_name[i].encode("UTF-8")+"-"+"目前累積成交量"+","+ \
            str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]*1000))+","+"倍週均量"+  \
-           ","+ "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率"+str(fields_otc()[i][2])+"-"+ \
-       	   ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]*1000))+","+"倍月均量"+ "\n")
+            "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+ \
+       	   str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]*1000))+","+"倍月均量"+ "\n")
            index = index + 1
     except:     # 回傳為None 或 資料不足導致ValueError
         pass

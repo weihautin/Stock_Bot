@@ -11,12 +11,9 @@ from datetime import datetime
 from grs import Stock
 from grs import TWSENo
 from grs import OTCNo
-#from csvv import yields as fields #TWSE殖益率
-#from csvv import yields_otc as fields_otc #OTC殖益率
-#from sell_buy_immediately import stock_buy_sell_oneday as oneday #是否為現股當充
-from grs import yields as fields
-from grs import yields_otc as fields_otc
-from grs import stock_buy_sell_oneday as oneday
+from csvv import yields as fields #TWSE殖益率
+from csvv import yields_otc as fields_otc #OTC殖益率
+from sell_buy_immediately import stock_buy_sell_oneday as oneday #是否為現股當充
 
 
 Stock_no_name = TWSENo().all_stock  # 所有上市股票名稱與代碼字典 type: dict
