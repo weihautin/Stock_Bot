@@ -33,10 +33,10 @@ else:
 f = open(u"today_future.txt",'w') #欲儲存資料的文字檔檔名
 f.write("開盤價         最高價         最低價         最後成交價     成交量         未沖銷契約量   日期\n") #文字檔標頭
 
-fetch_year = [int(year)] # 想要哪何年資料,用逗號分隔
-fetch_month = [int(month)-1,int(month)]   # 想要哪何月資料,用逗號分隔
-#fetch_year = [2015]
-#fetch_month = [5]
+#fetch_year = [int(year)] # 想要哪何年資料,用逗號分隔
+#fetch_month = [int(month)-4,int(month)]   # 想要哪何月資料,用逗號分隔
+fetch_year = [2015]
+fetch_month = [1,2,3,4,5]
 
 print u"正在連結期交所網站抓取資料，請稍等。抓取一個月的資料約10秒，需等待多久取決於抓取多少月份的資料"
 tmp = []
@@ -239,14 +239,33 @@ future_file.write("期貨三日內最低價均價==> %d"%(total/3)+"\n")
 ########
 
 
+low_price = []  #60日內最低價
+index = -1
+average_count = 1
+while average_count <= 60:
+        low_price.append(float(future_list[index][2]))
+        index = index - 1
+        average_count+=1
+
+print "期貨60日內最低價==> %d"%(min(low_price))
+
+future_file.write("期貨60日內最低價==> %d"%(min(low_price))+"\n")
 
 
 
 
 
+high_price = []  #60日內最高價
+index = -1
+average_count = 1 
+while average_count <= 60: 
+        high_price.append(float(future_list[index][1]))
+        index = index - 1 
+        average_count+=1
 
+print "期貨60日內高最價==> %d"%(max(high_price))
 
-
+future_file.write("期貨60日內最高價==> %d"%(max(high_price))+"\n")
 
 
 print u"抓取資料完成"
