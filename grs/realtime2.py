@@ -104,9 +104,14 @@ class Realtime(object):
             data[i['c']]['volume_acc'] = float(i['v'])
             data[i['c']]['yesterday_price'] = float(i['y'])
 
-            diff = data[i['c']]['price'] - data[i['c']]['open']
-            diff_percent = round(diff / data[i['c']]['open'] * 100, 2)
+          #  diff = data[i['c']]['price'] - data[i['c']]['open']
+          #  diff_percent = round(diff / data[i['c']]['open'] * 100, 2)
+          #  data[i['c']]['diff'] = (round(diff, 2), diff_percent)
+
+            diff = data[i['c']]['price'] - data[i['c']]['yesterday_price']
+            diff_percent = round(diff / data[i['c']]['yesterday_price'] * 100, 2)
             data[i['c']]['diff'] = (round(diff, 2), diff_percent)
+
 
             data[i['c']]['info'] = {'name': i['n'],
                                     'full_name': i['nf'],
