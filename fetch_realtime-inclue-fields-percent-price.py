@@ -42,7 +42,7 @@ ID = f.readline().strip('\n') #不包含換行符號\n:q
 PW = f.readline().strip('\n')
 
 
-fileopen.write('上市公司股票篩選\n\n\n'.decode('utf8').encode('-hkscs'))
+fileopen.write('上市公司股票篩選\n\n\n'.decode('utf8').encode('big5-hkscs'))
 
 #fileopen.write("股票",",","100",",","倍週均量",",","成交張數",",","殖利率","100",",","倍月均量")
 
@@ -67,7 +67,7 @@ for i in stock_no_list:
 
 
 fileopen.write('\n\n\n\n')
-fileopen.write('上櫃公司股票篩選\n\n\n\n')
+fileopen.write('上櫃公司股票篩選\n\n\n\n'.decode('utf8').encode('big5-hkscs'))
 
 #=====================
 index = 1
