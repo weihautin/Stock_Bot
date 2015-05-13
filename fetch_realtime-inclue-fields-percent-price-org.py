@@ -42,7 +42,7 @@ ID = f.readline().strip('\n') #不包含換行符號\n:q
 PW = f.readline().strip('\n')
 
 
-fileopen.write('上市公司股票篩選\n\n\n'.decode('utf8').encode('-hkscs'))
+fileopen.write('上市公司股票篩選\n\n\n')
 
 #fileopen.write("股票",",","100",",","倍週均量",",","成交張數",",","殖利率","100",",","倍月均量")
 
@@ -56,13 +56,13 @@ for i in stock_no_list:
         if realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(5)[0][-2] or realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(20)[0][-2]: #今天的量大於5日週均量
            print i,'TWSE123'        #暴量長紅2天
 
-           fileopen.write(i+"-"+Stock_no_name[i].decode('utf8').encode('big5-hkscs')+"-"+"目前累積成交量".decode('utf8').encode('big5-hkscs')+","+        \
-           str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]))+","+"倍週均量".decode('utf8').encode('big5-hkscs')+\
-           ","+"成交張數".decode('utf8').encode('big5-hkscs')+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率".decode('utf8').encode('big5-hkscs')+str(fields()[i][2])+"-"+ \
-           ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]))+","+"倍月均量".decode('utf8').encode('big5-hkscs')+ \
-           ","+"漲跌百分比".decode('utf8').encode('big5-hkscs')+","+str(float(realtime_data.data[i]['diff'][1]))+","+"昨天收盤價".decode('utf8').encode('big5-hkscs')+","+str(float(realtime_data.data[i]['yesterday_price']))+ "\n")
-	   index = index + 1
-    except: # 回傳為None 或 資料不足導致ValueError
+           fileopen.write(i+"-"+Stock_no_name[i].encode("UTF-8")+"-"+"目前累積成交量"+","+        \
+           str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]))+","+"倍週均量"+  \
+           ","+"成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率"+str(fields()[i][2])+"-"+ \
+           ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]))+","+"倍月均量"+","+"漲跌百分比"+","+str(float(realtime_data.data[i]['diff'][1]))+","+"昨天收盤價"+","+str(float(realtime_data.data[i]['yesterday_price']))+ "\n")
+
+
+    except:     # 回傳為None 或 資料不足導致ValueError
         pass
 
 
@@ -77,11 +77,10 @@ for i in OTC_no_list:
     try:
         if realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(5)[0][-2]*1000 or realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(20)[0][-2]*1000: #今天的量大於5日週均量
            print i,'OTC123'         #暴量長紅2天
-       	   fileopen.write(i+"-"+OTC_no_name[i].decode('utf8').encode('big5-hkscs')+"-"+"目前累積成交量".decode('utf8').encode('big5-hkscs')+","+ \
-           str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]*1000))+","+"倍週均量".decode('utf8').encode('big5-hkscs')+  \
-           ","+ "成交張數".decode('utf8').encode('big5-hkscs')+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率".decode('utf8').encode('big5-hkscs')+str(fields_otc()[i][2])+"-"+ \
-       	   ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]*1000))+","+"倍月均量".decode('utf8').encode('big5-hkscs')+ \
-            ","+"漲跌百分比".decode('utf8').encode('big5-hkscs')+","+str(float(realtime_data.data[i]['diff'][1]))+","+"昨天收盤價".decode('utf8').encode('big5-hkscs')+","+str(float(realtime_data.data[i]['yesterday_price']))+ "\n") 
+       	   fileopen.write(i+"-"+OTC_no_name[i].encode("UTF-8")+"-"+"目前累積成交量"+","+ \
+           str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]*1000))+","+"倍週均量"+  \
+           ","+ "成交張數"+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率"+str(fields_otc()[i][2])+"-"+ \
+       	   ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]*1000))+","+"倍月均量"+","+"漲跌百分比"+","+str(float(realtime_data.data[i]['diff'][1]))+","+"昨天收盤價"+","+str(float(realtime_data.data[i]['yesterday_price']))+ "\n") 
 
            index = index + 1
     except:     # 回傳為None 或 資料不足導致ValueError

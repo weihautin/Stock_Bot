@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""
-計算各股票加權貢獻
-"""
+#
+#計算各股票加權貢獻
+#
 # 請先安裝 sudo apt-get install sendemail
 
 import os
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     #for i in a:
     #    print i[0],i[1],i[2]
 
-    fileopen.write("各股加權貢獻依據2015年4月28日下的權重計算"+"\n")
+    fileopen.write("各股加權貢獻依據2015年4月28日下的權重計算".decode('utf8').encode('big5-hkscs')+"\n")
     
     total = 0    
     for i in a:
@@ -86,7 +86,7 @@ if __name__ == "__main__":
         print i[0],i[1],contribution,total      
         
         
-        fileopen.write(str(i[0])+','+str(i[1])+','+str(contribution)+','+ str(total)+"\n")
+        fileopen.write(str(i[0])+','+str(i[1]).decode('utf8').encode('big5-hkscs')+','+str(contribution)+','+ str(total)+"\n")
         
     fileopen.close()    #關閉檔案
 
