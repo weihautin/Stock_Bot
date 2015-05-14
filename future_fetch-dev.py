@@ -22,11 +22,21 @@ day = strftime('%d')
 
 # 1430下午兩點半以前抓昨天以前的資料,1430以後抓今天以前的資料
 if int(hour) < 1430:
-#    day=int(day)-1 為何要抓昨天以前即前天資料?
-    day=int(day)
-    if day < 9:
+
+    day=int(day) #為何要抓昨天以前即前天資料? 不需要因為後段程式會抓今天的資料,尾部要抓今天資料是因為前半部遇到
+    #抓不到日期會跳到今天資料, 所以有設定條件日今天日期則Break跳出迴圈
+    if day < 9: #幫日期加一個零 => 01 02 ~ 09
         download_date = year+'/'+month+'/'+'0'+str(day)
+    else:
+	download_date = year+'/'+month+'/'+str(day)
 else:
+    
+    day=int(day)
+    if day < 9: #幫日期加一個零 => 01 02 ~ 09
+        download_date = year+'/'+month+'/'+'0'+str(day)
+    else:
+        download_date = year+'/'+month+'/'+str(day)
+    
     download_date = today
 
 
@@ -36,7 +46,7 @@ f.write("開盤價         最高價         最低價         最後成交價  
 #fetch_year = [int(year)] # 想要哪何年資料,用逗號分隔
 #fetch_month = [int(month)-4,int(month)]   # 想要哪何月資料,用逗號分隔
 fetch_year = [2015]
-fetch_month = [1,2,3,4,5]
+fetch_month = [2,3,4,5]
 
 print u"正在連結期交所網站抓取資料，請稍等。抓取一個月的資料約10秒，需等待多久取決於抓取多少月份的資料"
 tmp = []
@@ -144,10 +154,6 @@ for line in html.readlines():
 
 #i+=1
 html.close()
-
-
-
-
 f.close()
 
 
@@ -162,9 +168,7 @@ f.close()
 
 
 
-
 future_file = open(u"calculate_future_average.txt",'w')
-
 
 future_file.write("今天期貨收盤價==> %d"%(int(future_list[-1][3]))+"\n")
 

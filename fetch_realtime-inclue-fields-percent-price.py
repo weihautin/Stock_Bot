@@ -56,7 +56,7 @@ for i in stock_no_list:
         if realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(5)[0][-2] or realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(20)[0][-2]: #今天的量大於5日週均量
            print i,'TWSE123'        #暴量長紅2天
 
-           fileopen.write(i+"-"+Stock_no_name[i].decode('utf8').encode('big5-hkscs')+"-"+"目前累積成交量".decode('utf8').encode('big5-hkscs')+","+        \
+           fileopen.write(i+"-"+Stock_no_name[i].encode('big5-hkscs')+"-"+"目前累積成交量".decode('utf8').encode('big5-hkscs')+","+        \
            str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]))+","+"倍週均量".decode('utf8').encode('big5-hkscs')+\
            ","+"成交張數".decode('utf8').encode('big5-hkscs')+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率".decode('utf8').encode('big5-hkscs')+str(fields()[i][2])+"-"+ \
            ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]))+","+"倍月均量".decode('utf8').encode('big5-hkscs')+ \
@@ -64,6 +64,9 @@ for i in stock_no_list:
 	   index = index + 1
     except: # 回傳為None 或 資料不足導致ValueError
         pass
+
+
+
 
 
 fileopen.write('\n\n\n\n')
@@ -77,7 +80,7 @@ for i in OTC_no_list:
     try:
         if realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(5)[0][-2]*1000 or realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(20)[0][-2]*1000: #今天的量大於5日週均量
            print i,'OTC123'         #暴量長紅2天
-       	   fileopen.write(i+"-"+OTC_no_name[i].decode('utf8').encode('big5-hkscs')+"-"+"目前累積成交量".decode('utf8').encode('big5-hkscs')+","+ \
+       	   fileopen.write(i+"-"+OTC_no_name[i].encode('big5-hkscs')+"-"+"目前累積成交量".decode('utf8').encode('big5-hkscs')+","+ \
            str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(5)[0][-2]*1000))+","+"倍週均量".decode('utf8').encode('big5-hkscs')+  \
            ","+ "成交張數".decode('utf8').encode('big5-hkscs')+"-"+str(realtime_data.data[i]['volume_acc'])+","+"殖益率".decode('utf8').encode('big5-hkscs')+str(fields_otc()[i][2])+"-"+ \
        	   ","+str(float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]*1000))+","+"倍月均量".decode('utf8').encode('big5-hkscs')+ \
@@ -88,8 +91,9 @@ for i in OTC_no_list:
         pass
 
 
-fileopen.close()                #關閉檔案
 
+
+fileopen.close()                #關閉檔案
 
 os.system('sendEmail -o \
  -f u160895@taipower.com.tw \
@@ -101,6 +105,5 @@ os.system('sendEmail -o \
  -m %s \
  -a %s \
  '%(ID, PW, title, content, attachment))
-
 
 
