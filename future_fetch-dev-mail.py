@@ -10,6 +10,9 @@
 假設查詢不到該日期,將會將網頁跳至今天的日期
 """
 import time
+from datetime import datetime
+import os
+
 
 start = time.time() #記錄程式執行後的開始時間
 
@@ -407,3 +410,33 @@ print u"總共花費", elapsed, u"秒."
     
 
 future_file.close()
+
+
+
+
+
+content = "風險管控,操作紀律."   #沒有辦法換行
+time_now = datetime.now().strftime("%Y%m%d-%H%M") #今天的日期 ex:2015-0411
+title = str(time_now+"-盤後期貨週月季最高最低價") #Email郵件的標題 ex:2015-0411-選股機器人
+
+attachment = 'calculate_future_average.txt' #附件名稱使用當日時間 ex:2015-0411.txt
+
+f = open('/home/tim/GMAIL.txt','r') #於前一個相對目錄中放置登入GMAIL帳號密碼,目的為了不再GitHub顯示出來.
+ID = f.readline().strip('\n') #不包含換行符號\n:q
+
+PW = f.readline().strip('\n')
+
+os.system('sendEmail -o \
+-f u160895@taipower.com.tw \
+-t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
+-s smtp.gmail.com:587 \
+-xu %s \
+-xp %s \
+-u %s \
+-m %s \
+-a %s \
+'%(ID, PW, title, content, attachment))
+
+
+
+
