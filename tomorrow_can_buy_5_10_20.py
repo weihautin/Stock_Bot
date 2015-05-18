@@ -42,7 +42,7 @@ OTC_no_list = OTCNo().all_stock_no # 所有上櫃股票代碼
 content = "贏要衝,輸要縮."   #沒有辦法換行
 
 time_now = datetime.now().strftime("%Y%m%d_%H%M%S") #今天的日期 ex:2015-0411
-title = str(time_now+"-明天標的股") #Email郵件的標題 ex:2015-0411-選股機器人
+title = str(time_now+"-5_10_20標的股") #Email郵件的標題 ex:2015-0411-選股機器人
 
 attachment = str(time_now)+'.txt' #附件名稱使用當日時間 ex:2015-0411.txt
 
@@ -56,35 +56,47 @@ PW = f.readline().strip('\n')
 fileopen.write('上市公司股票篩選\n\n\n')
 
 
-fileopen.write("\n""+昨天暴量長紅,今天又上漲"+"\n\n")
+fileopen.write("\n"+"5>10>20"+"\n\n")
 
 #=====================
 index = 1 
 for i in stock_no_list:
     #print i
     try:
-        if BestFourPoint(Stock(i,mons=2)).best_5_10_20_backtest(13):
+        if BestFourPoint(Stock(i,mons=3)).best_5_10_20_backtest(10):
            print i,'twse'         #暴量長紅2天
 
-           fileopen.write(str(index)+" "+"-"+Stock_no_name[i].encode("UTF-8")+"-"+i+"殖益率"+str(fields()[i][2])+"\n")
+           fileopen.write(str(index)+" "+"-"+Stock_no_name[i].encode("UTF-8")+"-"+i+"-"+"殖益率"+str(fields()[i][2])+"\n")
            index = index + 1 
     except:     # 回傳為None 或 資料不足導致ValueError
         pass
 
+
 fileopen.write('\n\n\n上櫃公司股票篩選\n\n\n')
-"""
 index = 1 
 for i in OTC_no_list:
     #print i
     try:
-        if BestFourPoint(Stock(i,mons=2)).best_5_10_20_backtest(15):
+        if BestFourPoint(Stock(i,mons=3)).best_5_10_20_backtest(10):
            print i,'otc'         #暴量長紅2天
 
-           fileopen.write(str(index)+" "+"-"+OTC_no_name[i].encode("UTF-8")+"-"+i+"殖益率"+str(fields_otc()[i][2])+"\n")
+           fileopen.write(str(index)+" "+"-"+OTC_no_name[i].encode("UTF-8")+"-"+i+"-"+"殖益率"+str(fields_otc()[i][2])+"\n")
            index = index + 1 
     except:     # 回傳為None 或 資料不足導致ValueError
         pass
-"""
 
 fileopen.close()                #關閉檔案
  
+
+os.system('sendEmail -o \
+ -f u160895@taipower.com.tw \
+ -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
+ -s smtp.gmail.com:587 \
+ -xu %s \
+ -xp %s \
+ -u %s \
+ -m %s \
+ -a %s \
+ '%(ID, PW, title, content, attachment))
+
+
