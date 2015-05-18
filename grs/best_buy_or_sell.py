@@ -58,6 +58,26 @@ class BestFourPoint(object):
         return self.data.moving_average(m)[0][-1] >  self.data.moving_average(n)[0][-1] and \
                self.data.moving_average(m)[0][-2] <= self.data.moving_average(n)[0][-2]
 
+    def best_5_10_20(self): 
+        """ 
+        5>10>20日均線
+        """
+        return self.data.moving_average(5)[0][-1] >  self.data.moving_average(10)[0][-1] > self.data.moving_average(20)[0][-1]
+
+    def best_5_10_20_backtest(self,n): 
+        """ 
+        5>10>20日均線,含n日回測
+        """
+        tmp = True
+        initial = 1
+
+        while initial <= n:
+		if self.data.moving_average(5)[0][-initial] >  self.data.moving_average(10)[0][-initial]  > self.data.moving_average(20)[0][-initial]:
+		 	pass	
+		else:
+			tmp = False
+	       	initial+=1
+	return tmp
 
 
 #        return self.data.check_moving_average_bias_ratio(

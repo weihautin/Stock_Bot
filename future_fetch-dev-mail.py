@@ -1,22 +1,17 @@
-﻿import urllib, re
-
-"""
+﻿"""
 執行結果為於執行目錄下,將產生一個**期交所每日期貨收盤資料.txt**文字檔
-"""
-"""
 期交所盤後約14:30分,網站才更新今日大盤資料
 故14:30前需要去抓昨天以前的資料
 期交所網站http://www.taifex.com.tw/chinese/3/3_1_1.asp
 假設查詢不到該日期,將會將網頁跳至今天的日期
 """
+import urllib, re
 import time
-from datetime import datetime
 import os
-
+from datetime import datetime
+from time import strftime
 
 start = time.time() #記錄程式執行後的開始時間
-
-from time import strftime
 today = strftime('%Y/%m/%d')
 hour = strftime('%H%M')
 year =  strftime('%Y')
