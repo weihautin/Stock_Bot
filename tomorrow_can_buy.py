@@ -56,7 +56,7 @@ PW = f.readline().strip('\n')
 fileopen.write('上市公司股票篩選\n\n\n')
 
 
-fileopen.write("\n""+昨天暴量長紅,今天又上漲"+"\n\n")
+fileopen.write("\n""+昨天暴量長紅,今天又上漲1~7%,成交張數要大於1000張"+"\n\n")
 
 #=====================
 index = 1 
@@ -75,7 +75,7 @@ for i in stock_no_list:
            except:
                one_day = "" #csv找不到該股票代碼,即不開放買賣現沖
 
-           fileopen.write(str(index)+" "+"昨天暴量長紅,今天又上漲1~7%,成交張數要大於1000張"+"-"+Stock_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]/1000))+"-"+"殖益率"+str(fields()[i][2])+"-"+one_day+"\n")
+           fileopen.write(str(index)+"-"+Stock_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]/1000))+"-"+"殖益率"+str(fields()[i][2])+"-"+one_day+"\n")
            index = index + 1 
     except:     # 回傳為None 或 資料不足導致ValueError
         pass
@@ -91,7 +91,7 @@ for i in OTC_no_list:
         if BestFourPoint(Stock(i,mons=2)).otc_y_v_t_r():
            print i,'otc'         #暴量長紅2天
 
-           fileopen.write(str(index)+" "+"昨天暴量長紅,今天又上漲1~7%,成交張數要大於1000張"+"-"+OTC_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]))+"-"+"殖益率"+str(fields_otc()[i][2])+"-"+"\n")
+           fileopen.write(str(index)+"-"+OTC_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]))+"-"+"殖益率"+str(fields_otc()[i][2])+"-"+"\n")
            index = index + 1 
     except:     # 回傳為None 或 資料不足導致ValueError
         pass
