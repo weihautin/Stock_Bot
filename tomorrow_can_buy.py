@@ -74,8 +74,16 @@ for i in stock_no_list:
                   one_day = ""
            except:
                one_day = "" #csv找不到該股票代碼,即不開放買賣現沖
+		
+	   close_price = Stock(i).raw[-1][6] 
+	   MA5 = Stock(i,mons=2).moving_average(5)[0][-1] 
+           MA10 = Stock(i,mons=2).moving_average(10)[0][-1]
+           MA20 = Stock(i,mons=2).moving_average(20)[0][-1]
 
-           fileopen.write(str(index)+"-"+Stock_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]/1000))+"-"+"殖益率"+str(fields()[i][2])+"-"+one_day+"\n")
+
+           fileopen.write(str(index)+"."+Stock_no_name[i].encode("UTF-8")+"("+i+")"+"-"+"成交張數"+str(int(Stock(i).raw[-1][1]/1000))+"-"+"殖益率" \
+           +str(fields()[i][2])+"-"+"收盤價"+str(close_price)+"-"+"週均線"+str(MA5)+"-"+"雙週均價"+str(MA10)+"-"+"月均價"+str(MA20)+one_day+"\n")
+
            index = index + 1 
     except:     # 回傳為None 或 資料不足導致ValueError
         pass
@@ -91,7 +99,17 @@ for i in OTC_no_list:
         if BestFourPoint(Stock(i,mons=2)).otc_y_v_t_r():
            print i,'otc'         #暴量長紅2天
 
-           fileopen.write(str(index)+"-"+OTC_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]))+"-"+"殖益率"+str(fields_otc()[i][2])+"-"+"\n")
+	   close_price = Stock(i).raw[-1][6] 
+           MA5 = Stock(i,mons=2).moving_average(5)[0][-1] 
+           MA10 = Stock(i,mons=2).moving_average(10)[0][-1]
+           MA20 = Stock(i,mons=2).moving_average(20)[0][-1]
+
+          # fileopen.write(str(index)+"-"+OTC_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]))+"-"+"殖益率"+str(fields_otc()[i][2])+"-"+"\n")
+
+           fileopen.write(str(index)+"."+OTC_no_name[i].encode("UTF-8")+"("+i+")"+"-"+"成交張數"+str(int(Stock(i).raw[-1][1]))+"-"+"殖益率" \
+           +str(fields_otc()[i][2])+"-"+"收盤價"+str(close_price)+"-"+"週均線"+str(MA5)+"-"+"雙週均價"+str(MA10)+"-"+"月均價"+str(MA20)+"\n")
+
+           
            index = index + 1 
     except:     # 回傳為None 或 資料不足導致ValueError
         pass
