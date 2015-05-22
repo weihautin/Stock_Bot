@@ -23,7 +23,7 @@ def twse_weight_percent():
     回傳大盤加權指數佔比
     """
     stock_weight_percent = []
-    f = open('/home/tim/Stock_Bot/stock_weighted_20150428.csv','r')
+    f = open('/home/tim/Stock_Bot/stock_weighted_20150522.csv','r')
     for row in csv.reader(f):
         try:
             #stock_weight_percent.append([row[1],row[2].decode('UTF-8'), row[3]])

@@ -19,8 +19,9 @@ from grs import BestFourPoint
 from grs import Stock
 from grs import TWSENo
 from grs import OTCNo
-from csvv import yields as fields #殖益率
-from csvv import yields_otc as fields_otc #殖益率
+from csvv import yields as fields #殖利率
+from csvv import yields_otc as fields_otc #殖利率
+from rand_market_value import market_value as rank_market_value #股本排名
 from sell_buy_immediately import stock_buy_sell_oneday as oneday #是否為現股當充
 
 
@@ -56,7 +57,7 @@ PW = f.readline().strip('\n')
 fileopen.write('上市公司股票篩選\n\n\n')
 
 
-fileopen.write("\n""+昨天暴量長紅,今天又上漲1~7%,成交張數要大於1000張"+"\n\n")
+fileopen.write("\n"+"昨天暴量長紅,今天又上漲1~7%,成交張數要大於1000張"+"\n")
 
 #=====================
 index = 1 
@@ -80,9 +81,24 @@ for i in stock_no_list:
            MA10 = Stock(i,mons=2).moving_average(10)[0][-1]
            MA20 = Stock(i,mons=2).moving_average(20)[0][-1]
 
+	   Bias5 = (close_price-MA5)/MA5*100
 
-           fileopen.write(str(index)+"."+Stock_no_name[i].encode("UTF-8")+"("+i+")"+"-"+"成交張數"+str(int(Stock(i).raw[-1][1]/1000))+"-"+"殖益率" \
-           +str(fields()[i][2])+"-"+"收盤價"+str(close_price)+"-"+"週均線"+str(MA5)+"-"+"雙週均價"+str(MA10)+"-"+"月均價"+str(MA20)+one_day+"\n")
+           Bias10 = (close_price-MA10)/MA10*100 
+
+           Bias20 = (close_price-MA20)/MA20*100
+
+           turnover_ration = float(Stock(i).raw[-1][1]/1000)/(float(rank_market_value()[i][3])*10000)*100 
+
+
+
+           
+
+           fileopen.write(str(index)+"."+Stock_no_name[i].encode("UTF-8")+"("+i+")"+"-"+"成交張數"+str(int(Stock(i).raw[-1][1]/1000))+"-"+"殖利率" \
+           +str(fields()[i][2])+"-"+"收盤價"+str(close_price)+"-"+"週均線"+str(MA5)+"("+"%.1f"%Bias5+"%"+")"+"-"+"雙週均價"+str(MA10)+"("+"%.1f"%Bias10+"%"+")"\
++"-"+"月均價"+str(MA20)+"("+"%.1f"%Bias20+"%"+")"+"-"+"發行"+rank_market_value()[i][3]+"萬張"+"-"+"市值"+rank_market_value()[i][4]+"億"+"-"+"上市"    \
++rank_market_value()[i][5]+"年"+"-"+rank_market_value()[i][6].encode("UTF-8")+"-"+"市值排名:"+rank_market_value()[i][0]+"/1548"+"-" \
++rank_market_value()[i][7].encode("UTF-8")+"-"+"當日週轉率"+"("+"%.3f"%turnover_ration+"%"+")"+one_day+"\n")
+
 
            index = index + 1 
     except:     # 回傳為None 或 資料不足導致ValueError
@@ -90,7 +106,7 @@ for i in stock_no_list:
 
 #=====================
 
-fileopen.write('\n\n\n上櫃公司股票篩選\n\n\n')
+fileopen.write('\n\n\n上櫃公司股票篩選'+"\n")
 
 index = 1 
 for i in OTC_no_list:
@@ -104,10 +120,18 @@ for i in OTC_no_list:
            MA10 = Stock(i,mons=2).moving_average(10)[0][-1]
            MA20 = Stock(i,mons=2).moving_average(20)[0][-1]
 
-          # fileopen.write(str(index)+"-"+OTC_no_name[i].encode("UTF-8")+"-"+i+"-"+"成交張數"+"-"+str(int(Stock(i).raw[-1][1]))+"-"+"殖益率"+str(fields_otc()[i][2])+"-"+"\n")
+           Bias5 = (close_price-MA5)/MA5*100
+           Bias10 = (close_price-MA10)/MA10*100
+           Bias20 = (close_price-MA20)/MA20*100
+           turnover_ration = float(Stock(i).raw[-1][1])/(float(rank_market_value()[i][3])*10000)*100
 
-           fileopen.write(str(index)+"."+OTC_no_name[i].encode("UTF-8")+"("+i+")"+"-"+"成交張數"+str(int(Stock(i).raw[-1][1]))+"-"+"殖益率" \
-           +str(fields_otc()[i][2])+"-"+"收盤價"+str(close_price)+"-"+"週均線"+str(MA5)+"-"+"雙週均價"+str(MA10)+"-"+"月均價"+str(MA20)+"\n")
+
+
+           fileopen.write(str(index)+"."+OTC_no_name[i].encode("UTF-8")+"("+i+")"+"-"+"成交張數"+str(int(Stock(i).raw[-1][1]))+"-"+"殖利率" \
+           +str(fields_otc()[i][2])+"-"+"收盤價"+str(close_price)+"-"+"週均線"+str(MA5)+"("+"%.1f"%Bias5+"%"+")"+"-"+"雙週均價"+str(MA10)+"("+"%.1f"%Bias10+"%"+")"\
++"-"+"月均價"+str(MA20)+"("+"%.1f"%Bias20+"%"+")"+"-"+"發行"+rank_market_value()[i][3]+"萬張"+"-"+"市值"+rank_market_value()[i][4]+"億"+"-"+"上市" \
++rank_market_value()[i][5]+"年"+"-"+rank_market_value()[i][6].encode("UTF-8")+"-"+"市值排名:"+rank_market_value()[i][0]+"/1548"+"-" \
++rank_market_value()[i][7].encode("UTF-8")+"-"+"當日週轉率"+"("+"%.3f"%turnover_ration+"%"+")"+"\n")
 
            
            index = index + 1 
