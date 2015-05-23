@@ -68,7 +68,7 @@ for i in stock_no_list:
            print i,'twse'         #暴量長紅2天
            try:
                if oneday()[i][1] == '':
-	          one_day = "買賣現沖 "
+	          one_day = "買賣現沖"
                elif oneday()[i][1] =='Y':
                   one_day = "先買現沖"
                else:
@@ -97,7 +97,7 @@ for i in stock_no_list:
            +str(fields()[i][2])+"-"+"收盤價"+str(close_price)+"-"+"週均線"+str(MA5)+"("+"%.1f"%Bias5+"%"+")"+"-"+"雙週均價"+str(MA10)+"("+"%.1f"%Bias10+"%"+")"\
 +"-"+"月均價"+str(MA20)+"("+"%.1f"%Bias20+"%"+")"+"-"+"發行"+rank_market_value()[i][3]+"萬張"+"-"+"市值"+rank_market_value()[i][4]+"億"+"-"+"上市"    \
 +rank_market_value()[i][5]+"年"+"-"+rank_market_value()[i][6].encode("UTF-8")+"-"+"市值排名:"+rank_market_value()[i][0]+"/1548"+"-" \
-+rank_market_value()[i][7].encode("UTF-8")+"-"+"當日週轉率"+"("+"%.3f"%turnover_ration+"%"+")"+one_day+"\n")
++"週轉率"+"("+"%.3f"%turnover_ration+"%"+")"+"-"+str(one_day)+"\n")
 
 
            index = index + 1 
@@ -131,7 +131,7 @@ for i in OTC_no_list:
            +str(fields_otc()[i][2])+"-"+"收盤價"+str(close_price)+"-"+"週均線"+str(MA5)+"("+"%.1f"%Bias5+"%"+")"+"-"+"雙週均價"+str(MA10)+"("+"%.1f"%Bias10+"%"+")"\
 +"-"+"月均價"+str(MA20)+"("+"%.1f"%Bias20+"%"+")"+"-"+"發行"+rank_market_value()[i][3]+"萬張"+"-"+"市值"+rank_market_value()[i][4]+"億"+"-"+"上市" \
 +rank_market_value()[i][5]+"年"+"-"+rank_market_value()[i][6].encode("UTF-8")+"-"+"市值排名:"+rank_market_value()[i][0]+"/1548"+"-" \
-+rank_market_value()[i][7].encode("UTF-8")+"-"+"當日週轉率"+"("+"%.3f"%turnover_ration+"%"+")"+"\n")
++"週轉率"+"("+"%.3f"%turnover_ration+"%"+")"+"\n")
 
            
            index = index + 1 

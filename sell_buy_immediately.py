@@ -18,7 +18,7 @@ def stock_buy_sell_oneday():
     f = open('TWTB4U_20150424.csv','r')
     for row in csv.reader(f):
         try:
-            buy_sell_oneday_dict[row[0].strip()]=[row[1].decode('Big5').strip(),row[2].strip()]
+            buy_sell_oneday_dict[row[0].strip()]=[row[1].decode('UTF-8').strip(),row[2].strip()]
         except:
             pass
     f.close()
