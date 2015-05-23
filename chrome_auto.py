@@ -29,7 +29,7 @@ driver.close()
 
 
 
-
+"""
 import time
 from selenium import webdriver
 
@@ -55,6 +55,35 @@ for y in range(2014, 2013, -1):
                 time.sleep(5)
 
 driver.close()
+"""
+
+
+import time
+from selenium import webdriver
+
+link_base = 'http://www.twse.com.tw/ch/trading/exchange/TWT93U/TWT93U.php'
+# http://www.twse.com.tw/ch/trading/exchange/TWT93U/TWT93U.php?input_date=101/03/02
+# 那天沒有開市沒網頁Download圖示的話會顯示IndexError: list index out of range
+# 預設目錄下載至此
+
+driver = webdriver.Chrome()
+
+
+#'?input_date={:d}/{:02d}/{:02d}'..format(y-1911, m, n)
+for y in range(2014, 2013, -1):
+    for m in range (5, 4, -1):
+        for n in range(12, 00, -1):
+            link = link_base + '?input_date={:d}/{:02d}/{:02d}'.format(y-1911, m, n)
+            driver.get(link)
+            if driver.find_elements_by_class_name('basic2'):
+                try:
+                    driver.find_elements_by_xpath('//img[contains(@src, "save_csv")]')[0].click()
+                except IndexError:
+                    pass
+                time.sleep(5)
+
+driver.close()
+
 
 
         
