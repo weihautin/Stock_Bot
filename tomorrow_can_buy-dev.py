@@ -21,6 +21,8 @@ from grs import TWSENo
 from grs import OTCNo
 from csvv import yields as fields #殖利率
 from csvv import yields_otc as fields_otc #殖利率
+from csvv import vip_other
+from csvv import vip_main 
 from rand_market_value import market_value as rank_market_value #股本排名
 from sell_buy_immediately import stock_buy_sell_oneday as oneday #是否為現股當充
 
@@ -92,12 +94,15 @@ for i in stock_no_list:
 
 
            
-
-           fileopen.write(Stock_no_name[i].encode("UTF-8")+"("+i+")"+"A"+","+"成交張數"+str(int(Stock(i).raw[-1][1]/1000))+","+"殖利率" \
+           try:
+		fileopen.write(Stock_no_name[i].encode("UTF-8")+"("+i+")"+"TWSE"+","+"成交張數"+str(int(Stock(i).raw[-1][1]/1000))+","+"殖利率" \
            +str(fields()[i][2])+","+"收盤價"+str(close_price)+","+"週均線"+"%.1f"%Bias5+"%"+","+"雙週均價"+"%.1f"%Bias10+"%"\
 +","+"月均價"+"%.1f"%Bias20+"%"+","+"發行"+rank_market_value()[i][3]+"萬張"+","+"市值"+rank_market_value()[i][4]+"億"+","+"上市"    \
 +rank_market_value()[i][5]+"年"+","+rank_market_value()[i][6].encode("UTF-8")+","+"市值排名:"+rank_market_value()[i][0]+"/1548"+"," \
-+"週轉率"+"%.3f"%turnover_ration+"%"+","+str(one_day)+"\n")
++"週轉率"+"%.3f"%turnover_ration+"%"+","+"政府機構"+vip_other()[i][1]+"%"+"橋外投資"+vip_other()[i][2]+"%"+"本國金融"+vip_other()[i][3]+"%" \
++"本國法人"+vip_other()[i][4]+"%"+"本國個人含董監"+vip_other()[i][5]+"%"+"董監持股"+vip_main()[i][2]+str(one_day)+"\n")
+	   except:
+		pass
 
 
            index = index + 1 
@@ -124,14 +129,17 @@ for i in OTC_no_list:
            Bias10 = (close_price-MA10)/MA10*100
            Bias20 = (close_price-MA20)/MA20*100
            turnover_ration = float(Stock(i).raw[-1][1])/(float(rank_market_value()[i][3])*10000)*100
-
-
-
-           fileopen.write(OTC_no_name[i].encode("UTF-8")+"("+i+")"+"B"+","+"成交張數"+str(int(Stock(i).raw[-1][1]))+","+"殖利率" \
+           try:
+		fileopen.write(OTC_no_name[i].encode("UTF-8")+"("+i+")"+"OTC"+","+"成交張數"+str(int(Stock(i).raw[-1][1]))+","+"殖利率" \
            +str(fields_otc()[i][2])+","+"收盤價"+str(close_price)+","+"週均線"+"%.1f"%Bias5+"%"+","+"雙週均價"+"%.1f"%Bias10+"%"\
-+","+"月均價"+"%.1f"%Bias20+"%"+","+"發行"+rank_market_value()[i][3]+"萬張"+","+"市值"+rank_market_value()[i][4]+"億"+","+"上市" \
++","+"月均價"+"%.1f"%Bias20+"%"+","+"發行"+rank_market_value()[i][3]+"萬張"+","+"市值"+rank_market_value()[i][4]+"億"+","+"上市"    \
 +rank_market_value()[i][5]+"年"+","+rank_market_value()[i][6].encode("UTF-8")+","+"市值排名:"+rank_market_value()[i][0]+"/1548"+"," \
-+"週轉率"+"%.3f"%turnover_ration+"%"+"\n")
++"週轉率"+"%.3f"%turnover_ration+"%"+","+"政府機構"+vip_other()[i][1]+"%"+"橋外投資"+vip_other()[i][2]+"%"+"本國金融"+vip_other()[i][3]+"%" \
++"本國法人"+vip_other()[i][4]+"%"+"本國個人含董監"+vip_other()[i][5]+"%"+"董監持股"+vip_main()[i][2]+str(one_day)+"\n")
+	   except:
+		pass
+	
+
 
            
            index = index + 1 
@@ -235,16 +243,6 @@ for i in OTC_no_list:
 """   
 fileopen.close()                #關閉檔案
 
-os.system('sendEmail -o \
- -f u160895@taipower.com.tw \
- -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
- -s smtp.gmail.com:587 \
- -xu %s \
- -xp %s \
- -u %s \
- -m %s \
- -a %s \
- '%(ID, PW, title, content, attachment))
 
  
  

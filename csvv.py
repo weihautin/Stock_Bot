@@ -39,11 +39,38 @@ def yields_otc():
             pass
     f.close()
     return twse_yields
-    
+
+def vip_other():
+    """ 
+    回傳dict:[持股資料年度	政府機構()	僑外投資()	本國金融機構()	本國法人()	本國個人()]
+    """
+    vip_other_return = {}
+    f = open('Vip_others.csv','r')
+    for row in csv.reader(f):
+        try:
+            vip_other_return[row[1]]=[row[3],row[4],row[5],row[6],row[7],row[8]]
+        except:
+            pass
+    f.close()
+    return vip_other_return 
+
+def vip_main():
+    """ 
+    回傳dict:[名稱	持股資料月份	全體董監持股(%)	全體董監質押(%) ]
+    """
+    vip_main_return = {}
+    f = open('Vip_main.csv','r')
+    for row in csv.reader(f):
+        try:
+            vip_main_return[row[0]]=[row[1],row[2],row[3],row[4]]
+        except:
+            pass
+    f.close()
+    return vip_main_return
 
 
 if __name__ == "__main__":
 
-    a = yields()
+    a = vip_main()
     print a['1101']
     
