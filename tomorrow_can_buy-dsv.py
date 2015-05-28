@@ -77,7 +77,7 @@ for i in stock_no_list:
                one_day = "" #csv找不到該股票代碼,即不開放買賣現沖
 		
 	   close_price = Stock(i).raw[-1][6] 
-	   MA5 = Stock(i,mons=2).moving_average(5)[0][-1]
+	   MA5 = Stock(i,mons=2).moving_average(5)[0][-1] 
            MA10 = Stock(i,mons=2).moving_average(10)[0][-1]
            MA20 = Stock(i,mons=2).moving_average(20)[0][-1]
 
@@ -93,11 +93,11 @@ for i in stock_no_list:
 
            
 
-           fileopen.write(str(index)+"."+Stock_no_name[i].encode("UTF-8")+"("+i+")"+"-"+"成交張數"+str(int(Stock(i).raw[-1][1]/1000))+"-"+"殖利率" \
-           +str(fields()[i][2])+"-"+"收盤價"+str(close_price)+"-"+"週均線"+str(MA5)+"("+"%.1f"%Bias5+"%"+")"+"-"+"雙週均價"+str(MA10)+"("+"%.1f"%Bias10+"%"+")"\
-+"-"+"月均價"+str(MA20)+"("+"%.1f"%Bias20+"%"+")"+"-"+"發行"+rank_market_value()[i][3]+"萬張"+"-"+"市值"+rank_market_value()[i][4]+"億"+"-"+"上市"    \
-+rank_market_value()[i][5]+"年"+"-"+rank_market_value()[i][6].encode("UTF-8")+"-"+"市值排名:"+rank_market_value()[i][0]+"/1548"+"-" \
-+"週轉率"+"("+"%.3f"%turnover_ration+"%"+")"+"-"+str(one_day)+"\n")
+           fileopen.write(Stock_no_name[i].encode("UTF-8")+"("+i+")"+"A"+","+"成交張數"+str(int(Stock(i).raw[-1][1]/1000))+","+"殖利率" \
+           +str(fields()[i][2])+","+"收盤價"+str(close_price)+","+"週均線"+"%.1f"%Bias5+"%"+","+"雙週均價"+"%.1f"%Bias10+"%"\
++","+"月均價"+"%.1f"%Bias20+"%"+","+"發行"+rank_market_value()[i][3]+"萬張"+","+"市值"+rank_market_value()[i][4]+"億"+","+"上市"    \
++rank_market_value()[i][5]+"年"+","+rank_market_value()[i][6].encode("UTF-8")+","+"市值排名:"+rank_market_value()[i][0]+"/1548"+"," \
++"週轉率"+"%.3f"%turnover_ration+"%"+","+str(one_day)+"\n")
 
 
            index = index + 1 
@@ -127,11 +127,11 @@ for i in OTC_no_list:
 
 
 
-           fileopen.write(str(index)+"."+OTC_no_name[i].encode("UTF-8")+"("+i+")"+"-"+"成交張數"+str(int(Stock(i).raw[-1][1]))+"-"+"殖利率" \
-           +str(fields_otc()[i][2])+"-"+"收盤價"+str(close_price)+"-"+"週均線"+str(MA5)+"("+"%.1f"%Bias5+"%"+")"+"-"+"雙週均價"+str(MA10)+"("+"%.1f"%Bias10+"%"+")"\
-+"-"+"月均價"+str(MA20)+"("+"%.1f"%Bias20+"%"+")"+"-"+"發行"+rank_market_value()[i][3]+"萬張"+"-"+"市值"+rank_market_value()[i][4]+"億"+"-"+"上市" \
-+rank_market_value()[i][5]+"年"+"-"+rank_market_value()[i][6].encode("UTF-8")+"-"+"市值排名:"+rank_market_value()[i][0]+"/1548"+"-" \
-+"週轉率"+"("+"%.3f"%turnover_ration+"%"+")"+"\n")
+           fileopen.write(OTC_no_name[i].encode("UTF-8")+"("+i+")"+"B"+","+"成交張數"+str(int(Stock(i).raw[-1][1]))+","+"殖利率" \
+           +str(fields_otc()[i][2])+","+"收盤價"+str(close_price)+","+"週均線"+"%.1f"%Bias5+"%"+","+"雙週均價"+"%.1f"%Bias10+"%"\
++","+"月均價"+"%.1f"%Bias20+"%"+","+"發行"+rank_market_value()[i][3]+"萬張"+","+"市值"+rank_market_value()[i][4]+"億"+","+"上市" \
++rank_market_value()[i][5]+"年"+","+rank_market_value()[i][6].encode("UTF-8")+","+"市值排名:"+rank_market_value()[i][0]+"/1548"+"," \
++"週轉率"+"%.3f"%turnover_ration+"%"+"\n")
 
            
            index = index + 1 
