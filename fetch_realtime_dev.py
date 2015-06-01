@@ -120,7 +120,7 @@ for i in OTC_no_list:
            time_month = float(realtime_data.data[i]['volume_acc'])/float(Stock(i,mons=3).moving_average_value(20)[0][-2]*1000)
 
            try:
-                fileopen.write(OTC_no_name[i].encode("UTF-8")+"("+i+")"+"TWSE"+","+"漲幅"+str(float(realtime_data.data[i]['diff'][1]))+"%"+","+"%.1f"%time_week+"倍週量"+","+ \
+                fileopen.write(OTC_no_name[i].encode("UTF-8")+"("+i+")"+"OTC"+","+"漲幅"+str(float(realtime_data.data[i]['diff'][1]))+"%"+","+"%.1f"%time_week+"倍週量"+","+ \
 "%.1f"%time_month+"倍月量"+","+"成交張數"+str(realtime_data.data[i]['volume_acc'])+","+"殖利率" \
            +str(fields_otc()[i][2])+","+"收盤價"+str(close_price)+","+"週均線"+"%.1f"%Bias5+"%"+","+"雙週均價"+"%.1f"%Bias10+"%"\
 +","+"月均價"+"%.1f"%Bias20+"%"+","+"發行"+rank_market_value()[i][3]+"萬張"+","+"市值"+rank_market_value()[i][4]+"億"+","+"上市"    \
