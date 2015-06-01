@@ -53,7 +53,6 @@ fileopen.write('上市公司股票篩選\n\n\n')
 
 
 #=====================
-"""
 for i in stock_no_list:
     #print i
     realtime_data = RealtimeTWSE(i)
@@ -92,7 +91,6 @@ for i in stock_no_list:
     except: # 回傳為None 或 資料不足導致ValueError
         pass
 
-"""
 
 
 fileopen.write('\n\n\n\n')
@@ -102,7 +100,7 @@ for i in OTC_no_list:
     #print i
     realtime_data = RealtimeOTC(i)  
     try:
-        if (realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(5)[0][-2] or realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(20)[0][-2]) and float(realtime_data.data[i]['diff'][1]) > 0: #今天的量大於5日週或月均量, 目前要漲
+        if (realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(5)[0][-2]*1000 or realtime_data.data[i]['volume_acc'] > Stock(i,mons=3).moving_average_value(20)[0][-2]*1000) and float(realtime_data.data[i]['diff'][1]) > 0: #今天的量大於5日週或月均量, 目前要漲
            print i,'TWSE123'        #暴量長紅2天
 
            close_price = Stock(i).raw[-1][6]
@@ -141,6 +139,19 @@ for i in OTC_no_list:
 
 
 fileopen.close()                #關閉檔案
+
+
+os.system('sendEmail -o \
+-f u160895@taipower.com.tw \
+-t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
+-s smtp.gmail.com:587 \
+-xu %s \
+-xp %s \
+-u %s \
+-m %s \
+-a %s \
+'%(ID, PW, title, content, attachment))
+
 
 
 
