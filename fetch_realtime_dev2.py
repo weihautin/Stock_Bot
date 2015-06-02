@@ -46,7 +46,7 @@ ID = f.readline().strip('\n') #不包含換行符號\n:q
 
 PW = f.readline().strip('\n')
 
-
+"""
 fileopen.write('上市公司股票篩選\n\n\n')
 
 #fileopen.write("股票",",","100",",","倍週均量",",","成交張數",",","殖利率","100",",","倍月均量")
@@ -91,8 +91,8 @@ for i in stock_no_list:
     except: # 回傳為None 或 資料不足導致ValueError
         pass
 
-
 """
+
 fileopen.write('\n\n\n\n')
 fileopen.write('上櫃公司股票篩選\n\n\n\n')
 
@@ -134,7 +134,7 @@ for i in OTC_no_list:
     except: # 回傳為None 或 資料不足導致ValueError
         pass
 
-"""
+
 
 
 

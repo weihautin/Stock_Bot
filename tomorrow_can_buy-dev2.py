@@ -111,6 +111,40 @@ for i in stock_no_list:
 
 #=====================
 
+fileopen.write('\n\n\n上櫃公司股票篩選'+"\n")
+
+index = 1 
+for i in OTC_no_list:
+    #print i
+    try:
+        if BestFourPoint(Stock(i,mons=2)).otc_y_v_t_r():
+           print i,'otc'         #暴量長紅2天
+
+	   close_price = Stock(i).raw[-1][6] 
+           MA5 = Stock(i,mons=2).moving_average(5)[0][-1] 
+           MA10 = Stock(i,mons=2).moving_average(10)[0][-1]
+           MA20 = Stock(i,mons=2).moving_average(20)[0][-1]
+
+           Bias5 = (close_price-MA5)/MA5*100
+           Bias10 = (close_price-MA10)/MA10*100
+           Bias20 = (close_price-MA20)/MA20*100
+           turnover_ration = float(Stock(i).raw[-1][1])/(float(rank_market_value()[i][3])*10000)*100
+           try:
+		fileopen.write(OTC_no_name[i].encode("UTF-8")+"("+i+")"+"OTC"+","+"成交張數"+str(int(Stock(i).raw[-1][1]))+","+"殖利率" \
+           +str(fields_otc()[i][2])+","+"收盤價"+str(close_price)+","+"週均線"+"%.1f"%Bias5+"%"+","+"雙週均價"+"%.1f"%Bias10+"%"\
++","+"月均價"+"%.1f"%Bias20+"%"+","+"發行"+rank_market_value()[i][3]+"萬張"+","+"市值"+rank_market_value()[i][4]+"億"+","+"上市"    \
++rank_market_value()[i][5]+"年"+","+rank_market_value()[i][6].encode("UTF-8")+","+"市值排名:"+rank_market_value()[i][0]+"/1548"+"," \
++"週轉率"+"%.3f"%turnover_ration+"%"+","+"政府機構"+vip_other()[i][1]+"%"+"橋外投資"+vip_other()[i][2]+"%"+"本國金融"+vip_other()[i][3]+"%" \
++"本國法人"+vip_other()[i][4]+"%"+"本國個人含董監"+vip_other()[i][5]+"%"+"董監持股"+vip_main()[i][2]+str(one_day)+"\n")
+	   except:
+		pass
+	
+
+
+           
+           index = index + 1 
+    except:     # 回傳為None 或 資料不足導致ValueError
+        pass
 
 
 """
