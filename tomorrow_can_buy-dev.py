@@ -99,7 +99,7 @@ for i in stock_no_list:
            +str(fields()[i][2])+","+"收盤價"+str(close_price)+","+"週均線"+"%.1f"%Bias5+"%"+","+"雙週均價"+"%.1f"%Bias10+"%"\
 +","+"月均價"+"%.1f"%Bias20+"%"+","+"發行"+rank_market_value()[i][3]+"萬張"+","+"市值"+rank_market_value()[i][4]+"億"+","+"上市"    \
 +rank_market_value()[i][5]+"年"+","+rank_market_value()[i][6].encode("UTF-8")+","+"市值排名:"+rank_market_value()[i][0]+"/1548"+"," \
-+"週轉率"+"%.3f"%turnover_ration+"%"+","+"政府機構"+vip_other()[i][1]+"%"+"橋外投資"+vip_other()[i][2]+"%"+"本國金融"+vip_other()[i][3]+"%" \
++"周轉率"+"%.3f"%turnover_ration+"%"+","+"政府機構"+vip_other()[i][1]+"%"+"橋外投資"+vip_other()[i][2]+"%"+"本國金融"+vip_other()[i][3]+"%" \
 +"本國法人"+vip_other()[i][4]+"%"+"本國個人含董監"+vip_other()[i][5]+"%"+"董監持股"+vip_main()[i][2]+str(one_day)+"\n")
 	   except:
 		pass

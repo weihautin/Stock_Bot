@@ -44,7 +44,7 @@ content = "贏要衝,輸要縮."   #沒有辦法換行
 time_now = datetime.now().strftime("%Y%m%d_%H%M%S") #今天的日期 ex:2015-0411
 title = str(time_now+"-5_10_20標的股") #Email郵件的標題 ex:2015-0411-選股機器人
 
-day = 40
+day = 20
 
 attachment = str(time_now)+'-'+str(day)+'.txt' #附件名稱使用當日時間 ex:2015-0411.txt
 

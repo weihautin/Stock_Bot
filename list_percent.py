@@ -53,6 +53,9 @@ twse_pos3_4 = []
 twse_pos4_5 = []
 twse_pos5_6 = []
 twse_pos6_7 = []
+twse_pos7_8 = []
+twse_pos8_9 = []
+twse_pos9_10 = []
 
 twse_minus0_1 = []
 twse_minus1_2 = []
@@ -61,6 +64,10 @@ twse_minus3_4 = []
 twse_minus4_5 = []
 twse_minus5_6 = []
 twse_minus6_7 = []
+twse_minus7_8 = []
+twse_minus8_9 = []
+twse_minus9_10 = []
+
 
 
 #=====================
@@ -81,8 +88,18 @@ for i in stock_no_list:
            twse_pos4_5.append(i)
         if percent >= 5 and percent < 6:
            twse_pos5_6.append(i)
-        if percent >= 6 and percent < 7.9:
+        if percent >= 6 and percent < 7:
            twse_pos6_7.append(i)
+	if percent >= 7 and percent < 8:
+	   twse_pos7_8.append(i)
+	if percent >= 8 and percent < 9:
+           twse_pos8_9.append(i)
+	if percent >= 9 and percent < 10.5:
+           twse_pos9_10.append(i)
+
+
+
+
         if percent < 0 and percent > -1:
            twse_minus0_1.append(i)
         if percent <= -1 and percent > -2:
@@ -95,8 +112,20 @@ for i in stock_no_list:
            twse_minus4_5.append(i)
         if percent <= -5 and percent > -6:
            twse_minus5_6.append(i)
-        if percent <= -6 and percent > -7.9:
+        if percent <= -6 and percent > -7:
            twse_minus6_7.append(i)
+	if percent <= -7 and percent > -8:
+	   twse_minus7_8.append(i)
+	if percent <= -8 and percent > -9:
+	   twse_minus8_9.append(i)
+	if percent <= -9 and percent > -10.5:
+	   twse_minus9_10.append(i)
+
+
+
+
+
+
 	if percent == 0:
 	   twse_pos0.append(i)
 
@@ -131,6 +160,16 @@ fileopen.write('上市公司中漲5~6 percent的有%d家,共佔了%.1f percent'%
 print '上市公司中漲6~7 percent的有%d家,共佔了%.1f percent'%(len(twse_pos6_7), len(twse_pos6_7)/float(total_twse)*100)
 fileopen.write('上市公司中漲6~7 percent的有%d家,共佔了%.1f percent'%(len(twse_pos6_7), len(twse_pos6_7)/float(total_twse)*100)+'\n')
 
+print '上市公司中漲7~8 percent的有%d家,共佔了%.1f percent'%(len(twse_pos7_8), len(twse_pos7_8)/float(total_twse)*100)
+fileopen.write('上市公司中漲7~8 percent的有%d家,共佔了%.1f percent'%(len(twse_pos7_8), len(twse_pos7_8)/float(total_twse)*100)+'\n')
+
+print '上市公司中漲8~9 percent的有%d家,共佔了%.1f percent'%(len(twse_pos8_9), len(twse_pos8_9)/float(total_twse)*100)
+fileopen.write('上市公司中漲7~8 percent的有%d家,共佔了%.1f percent'%(len(twse_pos8_9), len(twse_pos8_9)/float(total_twse)*100)+'\n')
+
+print '上市公司中漲9~10 percent的有%d家,共佔了%.1f percent'%(len(twse_pos9_10), len(twse_pos9_10)/float(total_twse)*100)
+fileopen.write('上市公司中漲9~10 percent的有%d家,共佔了%.1f percent'%(len(twse_pos9_10), len(twse_pos9_10)/float(total_twse)*100)+'\n')
+
+
 print '***************************'
 fileopen.write('***************************\n')
 
@@ -155,16 +194,28 @@ fileopen.write('上市公司中跌5~6 percent的有%d家,共佔了%.1f percent'%
 print '上市公司中跌6~7 percent的有%d家,共佔了%.1f percent'%(len(twse_minus6_7), len(twse_minus6_7)/float(total_twse)*100)
 fileopen.write('上市公司中跌6~7 percent的有%d家,共佔了%.1f percent'%(len(twse_minus6_7), len(twse_minus6_7)/float(total_twse)*100)+'\n')
 
+print '上市公司中跌7~8 percent的有%d家,共佔了%.1f percent'%(len(twse_minus7_8), len(twse_minus7_8)/float(total_twse)*100)
+fileopen.write('上市公司中跌7~8 percent的有%d家,共佔了%.1f percent'%(len(twse_minus7_8), len(twse_minus7_8)/float(total_twse)*100)+'\n')
+
+print '上市公司中跌8~9 percent的有%d家,共佔了%.1f percent'%(len(twse_minus8_9), len(twse_minus8_9)/float(total_twse)*100)
+fileopen.write('上市公司中跌8~9 percent的有%d家,共佔了%.1f percent'%(len(twse_minus8_9), len(twse_minus8_9)/float(total_twse)*100)+'\n')
+
+print '上市公司中跌9~10 percent的有%d家,共佔了%.1f percent'%(len(twse_minus9_10), len(twse_minus9_10)/float(total_twse)*100)
+fileopen.write('上市公司中跌9~10 percent的有%d家,共佔了%.1f percent'%(len(twse_minus9_10), len(twse_minus9_10)/float(total_twse)*100)+'\n')
+
+
+
+
 print '***************************'
 fileopen.write('***************************\n')
 
 
-print '買到上市平盤股票機率%.1f,上漲股票機率%.1f,下跌股票機率%.1f'%(len(twse_pos0)/float(total_twse)*100,(len(twse_pos0_1)+len(twse_pos1_2)+len(twse_pos2_3)+len(twse_pos3_4)+len(twse_pos4_5)+len(twse_pos5_6)+len(twse_pos6_7))/float(total_twse)*100, (len(twse_minus0_1)+len(twse_minus1_2)+len(twse_minus2_3)+len(twse_minus3_4)+len(twse_minus4_5)+len(twse_minus5_6)+len(twse_minus6_7))/float(total_twse)*100)
+print '買到上市平盤股票機率%.1f,上漲股票機率%.1f,下跌股票機率%.1f'%(len(twse_pos0)/float(total_twse)*100,(len(twse_pos0_1)+len(twse_pos1_2)+len(twse_pos2_3)+len(twse_pos3_4)+len(twse_pos4_5)+len(twse_pos5_6)+len(twse_pos6_7)+len(twse_pos7_8)+len(twse_pos8_9)+len(twse_pos9_10))/float(total_twse)*100, (len(twse_minus0_1)+len(twse_minus1_2)+len(twse_minus2_3)+len(twse_minus3_4)+len(twse_minus4_5)+len(twse_minus5_6)+len(twse_minus6_7)+len(twse_minus7_8)+len(twse_minus8_9)+len(twse_minus9_10))/float(total_twse)*100)
 
 
 twse_zero = len(twse_pos0)/float(total_twse)*100
-twse_up = (len(twse_pos0_1)+len(twse_pos1_2)+len(twse_pos2_3)+len(twse_pos3_4)+len(twse_pos4_5)+len(twse_pos5_6)+len(twse_pos6_7))/float(total_twse)*100
-tswe_down = (len(twse_minus0_1)+len(twse_minus1_2)+len(twse_minus2_3)+len(twse_minus3_4)+len(twse_minus4_5)+len(twse_minus5_6)+len(twse_minus6_7))/float(total_twse)*100
+twse_up = (len(twse_pos0_1)+len(twse_pos1_2)+len(twse_pos2_3)+len(twse_pos3_4)+len(twse_pos4_5)+len(twse_pos5_6)+len(twse_pos6_7)+len(twse_pos7_8)+len(twse_pos8_9)+len(twse_pos9_10))/float(total_twse)*100
+tswe_down = (len(twse_minus0_1)+len(twse_minus1_2)+len(twse_minus2_3)+len(twse_minus3_4)+len(twse_minus4_5)+len(twse_minus5_6)+len(twse_minus6_7)+len(twse_minus7_8)+len(twse_minus8_9)+len(twse_minus9_10))/float(total_twse)*100
 fileopen.write('買到上市平盤股票機率%.1f,上漲股票機率%.1f,下跌股票機率%.1f'%(twse_zero,twse_up,tswe_down)+'\n')
 
 
@@ -179,6 +230,9 @@ otc_pos3_4 = []
 otc_pos4_5 = []
 otc_pos5_6 = []
 otc_pos6_7 = []
+otc_pos7_8 = []
+otc_pos8_9 = []
+otc_pos9_10 = []
 
 otc_minus0_1 = []
 otc_minus1_2 = []
@@ -187,6 +241,9 @@ otc_minus3_4 = []
 otc_minus4_5 = []
 otc_minus5_6 = []
 otc_minus6_7 = []
+otc_minus7_8 = []
+otc_minus8_9 = []
+otc_minus9_10 = []
 
 
 
@@ -207,8 +264,15 @@ for i in OTC_no_list:
            otc_pos4_5.append(i)
         if percent >= 5 and percent < 6:
            otc_pos5_6.append(i)
-        if percent >= 6 and percent < 7.9:
+        if percent >= 6 and percent < 7:
            otc_pos6_7.append(i)
+	if percent >= 7 and percent < 8:
+           otc_pos7_8.append(i)
+	if percent >= 8 and percent < 9:
+           otc_pos8_9.append(i)
+	if percent >= 9 and percent < 10.5:
+           otc_pos9_10.append(i)
+
         if percent < 0 and percent > -1: 
            otc_minus0_1.append(i)
         if percent <= -1 and percent > -2: 
@@ -221,8 +285,15 @@ for i in OTC_no_list:
            otc_minus4_5.append(i)
         if percent <= -5 and percent > -6: 
            otc_minus5_6.append(i)
-        if percent <= -6 and percent > -7.9: 
+        if percent <= -6 and percent > -7: 
            otc_minus6_7.append(i)
+	if percent <= -7 and percent > -8:  
+           otc_minus7_8.append(i)
+	if percent <= -8 and percent > -9:  
+           otc_minus8_9.append(i)	
+	if percent <= -9 and percent > -10.5:  
+           otc_minus9_10.append(i)
+
         if percent == 0 :
 	   otc_pos0.append(i)
 
@@ -260,6 +331,18 @@ fileopen.write('上櫃公司中漲5~6 percent的有%d家,共佔了%.1f percent'%
 print '上櫃公司中漲6~7 percent的有%d家,共佔了%.1f percent'%(len(otc_pos6_7), len(otc_pos6_7)/float(total_otc)*100)
 fileopen.write('上櫃公司中漲6~7 percent的有%d家,共佔了%.1f percent'%(len(otc_pos6_7), len(otc_pos6_7)/float(total_otc)*100)+'\n')
 
+print '上櫃公司中漲7~8 percent的有%d家,共佔了%.1f percent'%(len(otc_pos7_8), len(otc_pos7_8)/float(total_otc)*100)
+fileopen.write('上櫃公司中漲7~8 percent的有%d家,共佔了%.1f percent'%(len(otc_pos7_8), len(otc_pos7_8)/float(total_otc)*100)+'\n')
+
+print '上櫃公司中漲8~9 percent的有%d家,共佔了%.1f percent'%(len(otc_pos8_9), len(otc_pos8_9)/float(total_otc)*100)
+fileopen.write('上櫃公司中漲8~9 percent的有%d家,共佔了%.1f percent'%(len(otc_pos8_9), len(otc_pos8_9)/float(total_otc)*100)+'\n')
+
+print '上櫃公司中漲9~10 percent的有%d家,共佔了%.1f percent'%(len(otc_pos9_10), len(otc_pos9_10)/float(total_otc)*100)
+fileopen.write('上櫃公司中漲9~10 percent的有%d家,共佔了%.1f percent'%(len(otc_pos9_10), len(otc_pos9_10)/float(total_otc)*100)+'\n')
+
+
+
+
 print '***************************'
 fileopen.write('***************************'+'\n')
 
@@ -284,20 +367,26 @@ fileopen.write('上櫃公司中跌5~6 percent的有%d家,共佔了%.1f percent'%
 print '上櫃公司中跌6~7 percent的有%d家,共佔了%.1f percent'%(len(otc_minus6_7), len(otc_minus6_7)/float(total_otc)*100)
 fileopen.write('上櫃公司中跌6~7 percent的有%d家,共佔了%.1f percent'%(len(otc_minus6_7), len(otc_minus6_7)/float(total_otc)*100)+'\n')
 
+print '上櫃公司中跌7~8 percent的有%d家,共佔了%.1f percent'%(len(otc_minus7_8), len(otc_minus7_8)/float(total_otc)*100)
+fileopen.write('上櫃公司中跌7~8 percent的有%d家,共佔了%.1f percent'%(len(otc_minus7_8), len(otc_minus7_8)/float(total_otc)*100)+'\n')
+
+print '上櫃公司中跌8~9 percent的有%d家,共佔了%.1f percent'%(len(otc_minus8_9), len(otc_minus8_9)/float(total_otc)*100)
+fileopen.write('上櫃公司中跌8~9 percent的有%d家,共佔了%.1f percent'%(len(otc_minus8_9), len(otc_minus8_9)/float(total_otc)*100)+'\n')
+
+print '上櫃公司中跌9~10 percent的有%d家,共佔了%.1f percent'%(len(otc_minus9_10), len(otc_minus9_10)/float(total_otc)*100)
+fileopen.write('上櫃公司中跌9~10 percent的有%d家,共佔了%.1f percent'%(len(otc_minus9_10), len(otc_minus9_10)/float(total_otc)*100)+'\n')
+
+
 print '***************************'
 fileopen.write('***************************'+'\n')
 
-print '買到上櫃平盤股票機率%.1f,上漲股票機率%.1f,下跌股票機率%.1f'%(len(otc_pos0)/float(total_otc)*100,(len(otc_pos0_1)+len(otc_pos1_2)+len(otc_pos2_3)+len(otc_pos3_4)+len(otc_pos4_5)+len(otc_pos5_6)+len(otc_pos6_7))/float(total_otc)*100, (len(otc_minus0_1)+len(otc_minus1_2)+len(otc_minus2_3)+len(otc_minus3_4)+len(otc_minus4_5)+len(otc_minus5_6)+len(otc_minus6_7))/float(total_otc)*100)
+print '買到上櫃平盤股票機率%.1f,上漲股票機率%.1f,下跌股票機率%.1f'%(len(otc_pos0)/float(total_otc)*100,(len(otc_pos0_1)+len(otc_pos1_2)+len(otc_pos2_3)+len(otc_pos3_4)+len(otc_pos4_5)+len(otc_pos5_6)+len(otc_pos6_7)+len(otc_pos7_8)+len(otc_pos8_9)+len(otc_pos9_10))/float(total_otc)*100, (len(otc_minus0_1)+len(otc_minus1_2)+len(otc_minus2_3)+len(otc_minus3_4)+len(otc_minus4_5)+len(otc_minus5_6)+len(otc_minus6_7)+len(otc_minus7_8)+len(otc_minus8_9)+len(otc_minus9_10))/float(total_otc)*100)
 
 otc_zero = len(otc_pos0)/float(total_otc)*100
-otc_up = (len(otc_pos0_1)+len(otc_pos1_2)+len(otc_pos2_3)+len(otc_pos3_4)+len(otc_pos4_5)+len(otc_pos5_6)+len(otc_pos6_7))/float(total_otc)*100
-otc_down = (len(otc_minus0_1)+len(otc_minus1_2)+len(otc_minus2_3)+len(otc_minus3_4)+len(otc_minus4_5)+len(otc_minus5_6)+len(otc_minus6_7))/float(total_otc)*100
+otc_up = (len(otc_pos0_1)+len(otc_pos1_2)+len(otc_pos2_3)+len(otc_pos3_4)+len(otc_pos4_5)+len(otc_pos5_6)+len(otc_pos6_7)+len(otc_pos7_8)+len(otc_pos8_9)+len(otc_pos9_10))/float(total_otc)*100
+otc_down = (len(otc_minus0_1)+len(otc_minus1_2)+len(otc_minus2_3)+len(otc_minus3_4)+len(otc_minus4_5)+len(otc_minus5_6)+len(otc_minus6_7)+len(otc_minus7_8)+len(otc_minus8_9)+len(otc_minus9_10))/float(total_otc)*100
 
 fileopen.write('買到上櫃平盤股票機率%.1f,上漲股票機率%.1f,下跌股票機率%.1f'%(otc_zero,otc_up,otc_down)+'\n\n\n\n\n\n\n\n')
-
-
-
-
 
 
 
@@ -305,13 +394,19 @@ print '***************************'
 fileopen.write('***************************'+'\n')
 
 print '買到全上市與上櫃平盤股票機率%.1f,上漲股票機率%.1f,下跌股票機率%.1f'%(  (len(otc_pos0)+len(twse_pos0))/float(total_twse+total_otc)*100 ,\
-     ( (len(otc_pos0_1)+len(otc_pos1_2)+len(otc_pos2_3)+len(otc_pos3_4)+len(otc_pos4_5)+len(otc_pos5_6)+len(otc_pos6_7))+(len(twse_pos0_1)+len(twse_pos1_2)+len(twse_pos2_3)+len(twse_pos3_4)+len(twse_pos4_5)+len(twse_pos5_6)+len(twse_pos6_7)) ) / float(total_twse+total_otc )*100, \
-((len(otc_minus0_1)+len(otc_minus1_2)+len(otc_minus2_3)+len(otc_minus3_4)+len(otc_minus4_5)+len(otc_minus5_6)+len(otc_minus6_7))+(len(twse_minus0_1)+len(twse_minus1_2)+len(twse_minus2_3)+len(twse_minus3_4)+len(twse_minus4_5)+len(twse_minus5_6)+len(twse_minus6_7))) / float(total_twse+total_otc )*100        )
+     ( (len(otc_pos0_1)+len(otc_pos1_2)+len(otc_pos2_3)+len(otc_pos3_4)+len(otc_pos4_5)+len(otc_pos5_6)+len(otc_pos6_7)+len(otc_pos7_8) \
++len(otc_pos8_9)+len(otc_pos9_10))+(len(twse_pos0_1)+len(twse_pos1_2)+len(twse_pos2_3)+len(twse_pos3_4)+len(twse_pos4_5)+len(twse_pos5_6)+ \
+len(twse_pos6_7)+len(twse_pos7_8)+len(twse_pos8_9)+len(twse_pos9_10)) ) / float(total_twse+total_otc )*100, \
+((len(otc_minus0_1)+len(otc_minus1_2)+len(otc_minus2_3)+len(otc_minus3_4)+len(otc_minus4_5)+len(otc_minus5_6)+len(otc_minus6_7)+ \
+len(otc_minus7_8)+len(otc_minus8_9)+len(otc_minus9_10))+(len(twse_minus0_1)+len(twse_minus1_2)+len(twse_minus2_3)+len(twse_minus3_4) \
++len(twse_minus4_5)+len(twse_minus5_6)+len(twse_minus6_7)+len(twse_minus7_8)+len(twse_minus8_9)+len(twse_minus9_10))) / float(total_twse+total_otc )*100 )
 
 
 total_zero = (len(otc_pos0)+len(twse_pos0))/float(total_twse+total_otc)*100
-total_up = ( (len(otc_pos0_1)+len(otc_pos1_2)+len(otc_pos2_3)+len(otc_pos3_4)+len(otc_pos4_5)+len(otc_pos5_6)+len(otc_pos6_7))+(len(twse_pos0_1)+len(twse_pos1_2)+len(twse_pos2_3)+len(twse_pos3_4)+len(twse_pos4_5)+len(twse_pos5_6)+len(twse_pos6_7)) ) / float(total_twse+total_otc )*100
-total_down = ((len(otc_minus0_1)+len(otc_minus1_2)+len(otc_minus2_3)+len(otc_minus3_4)+len(otc_minus4_5)+len(otc_minus5_6)+len(otc_minus6_7))+(len(twse_minus0_1)+len(twse_minus1_2)+len(twse_minus2_3)+len(twse_minus3_4)+len(twse_minus4_5)+len(twse_minus5_6)+len(twse_minus6_7))) / float(total_twse+total_otc )*100
+total_up = ( (len(otc_pos0_1)+len(otc_pos1_2)+len(otc_pos2_3)+len(otc_pos3_4)+len(otc_pos4_5)+len(otc_pos5_6)+len(otc_pos6_7)+len(otc_pos7_8)+len(otc_pos8_9)+len(otc_pos9_10))+ \
+(len(twse_pos0_1)+len(twse_pos1_2)+len(twse_pos2_3)+len(twse_pos3_4)+len(twse_pos4_5)+len(twse_pos5_6)+len(twse_pos6_7)+len(twse_pos7_8)+len(twse_pos8_9)+len(twse_pos9_10))) / float(total_twse+total_otc )*100
+total_down = ((len(otc_minus0_1)+len(otc_minus1_2)+len(otc_minus2_3)+len(otc_minus3_4)+len(otc_minus4_5)+len(otc_minus5_6)+len(otc_minus6_7)++len(otc_minus7_8)+len(otc_minus8_9)+len(otc_minus9_10)) \
++(len(twse_minus0_1)+len(twse_minus1_2)+len(twse_minus2_3)+len(twse_minus3_4)+len(twse_minus4_5)+len(twse_minus5_6)+len(twse_minus6_7)+len(twse_minus7_8)+len(twse_minus8_9)+len(twse_minus9_10))) / float(total_twse+total_otc )*100
 
 fileopen.write('買到全上市與上櫃平盤股票機率%.1f,上漲股票機率%.1f,下跌股票機率%.1f'%(total_zero,total_up,total_down))
 
