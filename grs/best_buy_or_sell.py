@@ -79,6 +79,41 @@ class BestFourPoint(object):
 	       	initial+=1
 	return tmp
 
+	
+    def breakthrough(self, n, m ,nn, mm): 
+        """ 
+        5>10>20日均線,含n日回測
+	回測n天中,5與10與20日均線總和平均在m%盤整,今天暴nn倍的mm日均量
+        """
+        tmp = True
+        initial = 1 
+	# -1 表示今天, -2表示昨天
+
+
+		
+
+
+        while initial <= n:
+
+		MA_average = (self.data.moving_average(5)[0][-initial-1]+self.data.moving_average(10)[0][-initial-1]+self.data.moving_average(20)[0][-initial-1])/3
+		if min(self.data.moving_average(5)[0][-initial-1], self.data.moving_average(10)[0][-initial-1], self.data.moving_average(20)[0][-initial-1]) < MA_average*(1-m/100) and  \
+		   max(self.data.moving_average(5)[0][-initial-1], self.data.moving_average(10)[0][-initial-1], self.data.moving_average(20)[0][-initial-1]) > MA_average*(1+m/100): 
+			pass
+		else:
+			tmp = False
+			return False
+                initial+=1
+
+
+
+
+	if (self.data.value[-1]/self.data.moving_average_value(mm)[0][-2]) > nn and self.data.price[-1] > self.data.price[-2]:
+		return True
+	else:
+		return False
+
+        return tmp	
+
 
 #        return self.data.check_moving_average_bias_ratio(
 #                               self.data.moving_average_bias_ratio(m, n)[0])[0] \
