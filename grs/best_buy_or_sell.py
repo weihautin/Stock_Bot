@@ -142,14 +142,14 @@ class BestFourPoint(object):
         """ 昨天暴量長紅,今天又上漲
         """
         result = self.data.value[-2] > self.data.value[-3] and self.data.price[-2] > self.data.openprice[-2] and \
-                 self.data.price[-1]/self.data.price[-2] >= 1.01  and self.data.price[-1]/self.data.price[-2] <= 1.11 and self.data.value[-1] > 1000 
+                 self.data.price[-1]/self.data.price[-2] >= 1.01  and self.data.price[-1]/self.data.price[-2] <= 1.11 and self.data.value[-1] > 100  
         return result
 
     def otc_y_v_t_r(self):
         """ 昨天暴量長紅,今天又上漲
         """
         result = self.data.value[-2] > self.data.value[-3] and self.data.price[-2] > self.data.openprice[-2] and \
-                 self.data.price[-1]/self.data.price[-2] >= 1.01  and self.data.price[-1]/self.data.price[-2] <= 1.11 and self.data.value[-1]*1000 > 1000  
+                 self.data.price[-1]/self.data.price[-2] >= 1.01  and self.data.price[-1]/self.data.price[-2] <= 1.11 and self.data.value[-1]*1000 > 100   
         return result
 
 	

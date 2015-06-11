@@ -37,7 +37,7 @@ content = "贏要衝,輸要縮."   #沒有辦法換行
 time_now = datetime.now().strftime("%Y%m%d-%H%M") #今天的日期 ex:2015-0411
 title = str(time_now+"-盤中即時成交量機器人") #Email郵件的標題 ex:2015-0411-選股機器人
 
-attachment = str(time_now)+'.csv' #附件名稱使用當日時間 ex:2015-0411.txt
+attachment = str(time_now)+'.txt' #附件名稱使用當日時間 ex:2015-0411.txt
 
 fileopen = open(attachment, 'w') #開啟檔案,w沒有該檔案就新增
 
@@ -142,8 +142,8 @@ fileopen.close()                #關閉檔案
 
 
 os.system('sendEmail -o \
--f u160895@taipower.com.tw \
--t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
+-f weihautin@gmail.com  \
+-t "WEI <weihautin@gmail.com>" \
 -s smtp.gmail.com:587 \
 -xu %s \
 -xp %s \
