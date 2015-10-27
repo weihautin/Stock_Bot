@@ -59,7 +59,7 @@ PW = f.readline().strip('\n')
 fileopen.write('上市公司股票篩選\n\n\n')
 
 
-fileopen.write("\n"+"昨天暴量長紅,今天又上漲1~7%,成交張數要大於1000張"+"\n")
+fileopen.write("\n"+"昨天增量長紅,今天又上漲1~10%,成交張數要大於500張"+"\n")
 
 #=====================
 index = 1 
@@ -248,7 +248,7 @@ fileopen.close()                #關閉檔案
  
 os.system('sendEmail -o \
 -f weihautin@gmail.com  \
--t "WEI <weihautin@gmail.com>" \
+-t "WEI <weihautin@gmail.com>" figoman1979@gmail.com u027351@taipower.com.tw \
 -s smtp.gmail.com:587 \
 -xu %s \
 -xp %s \
@@ -257,6 +257,7 @@ os.system('sendEmail -o \
 -a %s \
 '%(ID, PW, title, content, attachment))
 
+# figoman1979@gmail.com
  
 
  

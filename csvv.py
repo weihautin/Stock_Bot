@@ -15,7 +15,7 @@ def yields():
     EX: a['1101'] = [u'\u53f0\u6ce5', '14.93', '5.69', '1.37']
     """
     twse_yields = {}
-    f = open('BWIBBU_d20150519.csv','r')
+    f = open('BWIBBU_d20151026.csv','r')
     for row in csv.reader(f):
         try:
             twse_yields[row[0]]=[row[1].decode('Big5'),row[2],row[3],row[4]]
@@ -26,12 +26,13 @@ def yields():
     
 def yields_otc():
     """
+    https://www.tpex.org.tw/web/stock/aftertrading/peratio_analysis/pera.php?l=zh-tw
     回傳dict:[股票名稱, 本益比, 殖利率(%), 股價淨值比]
     回傳dict:[台泥utf8, '14.93', '5.69', '1.37']
     EX: a['1101'] = [u'\u53f0\u6ce5', '14.93', '5.69', '1.37']
     """
     twse_yields = {}
-    f = open('pera_1040519.csv','r')
+    f = open('pera_1041026.csv','r')
     for row in csv.reader(f):
         try:
             twse_yields[row[0]]=[row[1].decode('Big5'),row[2],row[3],row[4]]
