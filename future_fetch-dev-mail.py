@@ -44,7 +44,8 @@ f.write("開盤價         最高價         最低價         最後成交價  
 #fetch_year = [int(year)] # 想要哪何年資料,用逗號分隔
 #fetch_month = [int(month)-4,int(month)]   # 想要哪何月資料,用逗號分隔
 fetch_year = [2015]
-fetch_month = [03,04,05,06]
+fetch_month = [7,8,9,10]
+
 
 print u"正在連結期交所網站抓取資料，請稍等。抓取一個月的資料約10秒，需等待多久取決於抓取多少月份的資料"
 tmp = []

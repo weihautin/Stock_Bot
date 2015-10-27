@@ -26,7 +26,7 @@ f = open(u"range.txt",'w') #欲儲存資料的文字檔檔名
 f.write("人數	股數	佔集保庫存數比例 (%)\n") #文字檔標頭
 
 #stock_No_total = [1101,1102,2330,2412]
-fetch_month = [20150302,20150430,20150522]
+fetch_month = [20150828,20150925,20151023]
 
 print u"正在連結期交所網站抓取資料，請稍等。抓取一個月的資料約10秒，需等待多久取決於抓取多少月份的資料"
 
@@ -115,13 +115,13 @@ for m in owner.keys():
 big_tmp = []
 
 for n in owner.keys():
-    if owner[n][-1][-4] > owner[n][-2][-4] > owner[n][-3][-4]:
-        tmp = (float(owner[n][-1][-4])-float(owner[n][-3][-4]))*float(owner[n][-1][-2].replace(',', ''))/100/1000
-        print Stock_no_name[n],"(",n,")",'大股東持股增加',float(owner[n][-1][-4])-float(owner[n][-3][-4]),"%","目前總股數",owner[n][-1][-2],"約增加","%.0f"%tmp,"張"
-        big_tmp.append(n)
-        
-        
-
+    try:
+        if owner[n][-1][-4] > owner[n][-2][-4] > owner[n][-3][-4]:
+            tmp = (float(owner[n][-1][-4])-float(owner[n][-3][-4]))*float(owner[n][-1][-2].replace(',', ''))/100/1000
+	    print Stock_no_name[n],"(",n,")",'大股東持股增加',float(owner[n][-1][-4])-float(owner[n][-3][-4]),"%","目前總股數",owner[n][-1][-2],"約增加","%.0f"%tmp,"張"
+            big_tmp.append(n)
+    except:
+	pass
 
         
 big_tmp_less = []

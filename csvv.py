@@ -15,7 +15,7 @@ def yields():
     EX: a['1101'] = [u'\u53f0\u6ce5', '14.93', '5.69', '1.37']
     """
     twse_yields = {}
-    f = open('BWIBBU_d20151026.csv','r')
+    f = open('./update_csv/BWIBBU_d20151026.csv','r')
     for row in csv.reader(f):
         try:
             twse_yields[row[0]]=[row[1].decode('Big5'),row[2],row[3],row[4]]
@@ -32,7 +32,7 @@ def yields_otc():
     EX: a['1101'] = [u'\u53f0\u6ce5', '14.93', '5.69', '1.37']
     """
     twse_yields = {}
-    f = open('pera_1041026.csv','r')
+    f = open('./update_csv/pera_1041026.csv','r')
     for row in csv.reader(f):
         try:
             twse_yields[row[0]]=[row[1].decode('Big5'),row[2],row[3],row[4]]
@@ -46,7 +46,7 @@ def vip_other():
     回傳dict:[持股資料年度	政府機構()	僑外投資()	本國金融機構()	本國法人()	本國個人()]
     """
     vip_other_return = {}
-    f = open('Vip_others.csv','r')
+    f = open('./update_csv/Vip_others.csv','r')
     for row in csv.reader(f):
         try:
             vip_other_return[row[1]]=[row[3],row[4],row[5],row[6],row[7],row[8]]
@@ -60,7 +60,7 @@ def vip_main():
     回傳dict:[名稱	持股資料月份	全體董監持股(%)	全體董監質押(%) ]
     """
     vip_main_return = {}
-    f = open('Vip_main.csv','r')
+    f = open('./update_csv/Vip_main.csv','r')
     for row in csv.reader(f):
         try:
             vip_main_return[row[0]]=[row[1],row[2],row[3],row[4]]

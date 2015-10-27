@@ -23,7 +23,7 @@ def twse_weight_percent():
     回傳大盤加權指數佔比
     """
     stock_weight_percent = []
-    f = open('/home/tim/Stock_Bot/stock_weighted_20151026.csv','r')
+    f = open('/home/tim/Stock_Bot/update_csv/stock_weighted_20151026.csv','r')
     for row in csv.reader(f):
         try:
             #stock_weight_percent.append([row[1],row[2].decode('UTF-8'), row[3]])
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     #for i in a:
     #    print i[0],i[1],i[2]
 
-    fileopen.write("各股加權貢獻依據2015年4月28日下的權重計算".decode('utf8').encode('big5-hkscs')+"\n")
+    fileopen.write("各股加權貢獻依據2015年10月27日下的權重計算".decode('utf8').encode('big5-hkscs')+"\n")
     
     total = 0    
     for i in a:
@@ -92,7 +92,7 @@ if __name__ == "__main__":
 
     os.system('sendEmail -o \
     -f u160895@taipower.com.tw \
-    -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
+    -t "WEI <weihautin@gmail.com>" figoman1979@gmail.com u027351@taipower.com.tw  \
     -s smtp.gmail.com:587 \
     -xu %s \
     -xp %s \
@@ -100,22 +100,4 @@ if __name__ == "__main__":
     -m %s \
     -a %s \
     '%(ID, PW, title, content, attachment))
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
 
