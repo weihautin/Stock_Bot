@@ -15,7 +15,7 @@ def stock_buy_sell_oneday():
     EX: a['1101'] = [u'\u53f0\u6ce5', '14.93', '5.69', '1.37']
     '''
     buy_sell_oneday_dict = {}
-    f = open('TWTB4U_20150424.csv','r')
+    f = open('/home/tim/Stock_Bot/update_csv/TWTB4U_20150424.csv','r')
     for row in csv.reader(f):
         try:
             buy_sell_oneday_dict[row[0].strip()]=[row[1].decode('UTF-8').strip(),row[2].strip()]

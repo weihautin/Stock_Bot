@@ -92,7 +92,7 @@ fileopen.close()                #關閉檔案
 
 os.system('sendEmail -o \
  -f u160895@taipower.com.tw \
- -t "WEI <weihautin@gmail.com>" figoman1979@gmail.com u027351@taipower.com.tw \
+ -t "WEI <weihautin@gmail.com>" u027351@taipower.com.tw \
  -s smtp.gmail.com:587 \
  -xu %s \
  -xp %s \
@@ -101,4 +101,4 @@ os.system('sendEmail -o \
  -a %s \
  '%(ID, PW, title, content, attachment))
 
-
+# figoman1979@gmail.com

@@ -92,7 +92,7 @@ if __name__ == "__main__":
 
     os.system('sendEmail -o \
     -f u160895@taipower.com.tw \
-    -t "WEI <weihautin@gmail.com>" figoman1979@gmail.com u027351@taipower.com.tw  \
+    -t "WEI <weihautin@gmail.com>" u027351@taipower.com.tw  \
     -s smtp.gmail.com:587 \
     -xu %s \
     -xp %s \
@@ -101,3 +101,5 @@ if __name__ == "__main__":
     -a %s \
     '%(ID, PW, title, content, attachment))
 
+
+# figoman1979@gmail.com
