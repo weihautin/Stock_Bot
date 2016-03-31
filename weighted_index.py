@@ -120,7 +120,9 @@ if __name__ == "__main__":
 
           
     
-    print a.Weighted_Index_average(2,a.serial_fetch())# 印出週線
+    print a.Weighted_Index_average(1,a.serial_fetch())# 印出每日收盤價格
+
+    a8 = str(int(a.Weighted_Index_average(1,a.serial_fetch())[-1]))+'-'+'昨日收盤價***'
     
     print int(a.Weighted_Index_average(3,a.serial_fetch())[-1]),'三日均線'# 印出三日均線
     
@@ -137,15 +139,31 @@ if __name__ == "__main__":
     print int(a.Weighted_Index_average(240,a.serial_fetch())[-1]),'年線'# 印出年線
   
     fileopen.write(str(int(a.Weighted_Index_average(3,a.serial_fetch())[-1]))+'-'+'三日均線'+'\n')
+    a1 = str(int(a.Weighted_Index_average(3,a.serial_fetch())[-1]))+'-'+'三日均線***'
+
     fileopen.write(str(int(a.Weighted_Index_average(5,a.serial_fetch())[-1]))+'-'+'週線'+'\n')
+    a2 = str(int(a.Weighted_Index_average(5,a.serial_fetch())[-1]))+'-'+'週線***'
+
     fileopen.write(str(int(a.Weighted_Index_average(10,a.serial_fetch())[-1]))+'-'+'雙週線'+'\n')
+    a3 = str(int(a.Weighted_Index_average(10,a.serial_fetch())[-1]))+'-'+'雙週線***'
+
     fileopen.write(str(int(a.Weighted_Index_average(20,a.serial_fetch())[-1]))+'-'+'月線'+'\n')
+    a4 = str(int(a.Weighted_Index_average(20,a.serial_fetch())[-1]))+'-'+'月線***'
+
     fileopen.write(str(int(a.Weighted_Index_average(60,a.serial_fetch())[-1]))+'-'+'季線'+'\n')
+    a5 = str(int(a.Weighted_Index_average(60,a.serial_fetch())[-1]))+'-'+'季線***'
+
     fileopen.write(str(int(a.Weighted_Index_average(120,a.serial_fetch())[-1]))+'-'+'半年線'+'\n')
+    a6 = str(int(a.Weighted_Index_average(120,a.serial_fetch())[-1]))+'-'+'半年線***'
+
     fileopen.write(str(int(a.Weighted_Index_average(240,a.serial_fetch())[-1]))+'-'+'年線'+'\n')
+    a7 = str(int(a.Weighted_Index_average(240,a.serial_fetch())[-1]))+'-'+'年線***'
+
+
+    content_1 = a8+a1+a2+a3+a4+a5+a6+a7
 
     fileopen.close() 
-
+     
     os.system('sendEmail -o \
     -f u160895@taipower.com.tw \
     -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
@@ -155,7 +173,7 @@ if __name__ == "__main__":
     -u %s \
     -m %s \
     -a %s \
-    '%(ID, PW, title, content, attachment))
+    '%(ID, PW, title, content_1, attachment))
     
    
     
