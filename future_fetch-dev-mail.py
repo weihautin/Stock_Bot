@@ -43,8 +43,8 @@ f.write("開盤價         最高價         最低價         最後成交價  
 
 #fetch_year = [int(year)] # 想要哪何年資料,用逗號分隔
 #fetch_month = [int(month)-4,int(month)]   # 想要哪何月資料,用逗號分隔
-fetch_year = [2015]
-fetch_month = [7,8,9,10]
+fetch_year = [2015,2016]
+fetch_month = [12,1,2]
 
 
 print u"正在連結期交所網站抓取資料，請稍等。抓取一個月的資料約10秒，需等待多久取決於抓取多少月份的資料"
@@ -332,7 +332,7 @@ print "期貨20日內高最價==> %d"%(max(high_price))
 future_file.write("期貨20日內最高價==> %d"%(max(high_price))+"\n")
 
 
-
+"""
 low_price = []  #40日內最低價
 index = -1
 average_count = 1
@@ -362,7 +362,6 @@ print "期貨40日內高最價==> %d"%(max(high_price))
 future_file.write("期貨40日內最高價==> %d"%(max(high_price))+"\n")
 
 
-
 low_price = []  #60日內最低價
 index = -1
 average_count = 1
@@ -390,7 +389,7 @@ while average_count <= 60:
 print "期貨60日內高最價==> %d"%(max(high_price))
 
 future_file.write("期貨60日內最高價==> %d"%(max(high_price))+"\n")
-
+"""
 
 print u"抓取資料完成"
 
@@ -422,6 +421,7 @@ ID = f.readline().strip('\n') #不包含換行符號\n:q
 
 PW = f.readline().strip('\n')
 
+"""
 os.system('sendEmail -o \
 -f u160895@taipower.com.tw \
 -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
@@ -432,6 +432,18 @@ os.system('sendEmail -o \
 -m %s \
 -a %s \
 '%(ID, PW, title, content, attachment))
+"""
+
+os.system('sendEmail -o \
+-f u160895@taipower.com.tw \
+-t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
+-s smtp.gmail.com:587 \
+-xu %s \
+-xp %s \
+-u %s \
+-o message-file=/home/tim/Stock_Bot/calculate_future_average.txt \
+'%(ID, PW, title))
+
 
 
 

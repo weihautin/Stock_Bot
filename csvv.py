@@ -15,7 +15,7 @@ def yields():
     EX: a['1101'] = [u'\u53f0\u6ce5', '14.93', '5.69', '1.37']
     """
     twse_yields = {}
-    f = open('/home/tim/Stock_Bot/update_csv/BWIBBU_d20151026.csv','r')
+    f = open('/home/tim/Stock_Bot/update_csv/BWIBBU_d20160331.csv','r')
     for row in csv.reader(f):
         try:
             twse_yields[row[0]]=[row[1].decode('Big5'),row[2],row[3],row[4]]
@@ -32,7 +32,7 @@ def yields_otc():
     EX: a['1101'] = [u'\u53f0\u6ce5', '14.93', '5.69', '1.37']
     """
     twse_yields = {}
-    f = open('/home/tim/Stock_Bot/update_csv/pera_1041026.csv','r')
+    f = open('/home/tim/Stock_Bot/update_csv/pera_1050330.csv','r')
     for row in csv.reader(f):
         try:
             twse_yields[row[0]]=[row[1].decode('Big5'),row[2],row[3],row[4]]

@@ -44,7 +44,9 @@ if __name__ == "__main__":
 
     attachment = str(time_now)+'.csv' #附件名稱使用當日時間 ex:2015-0411.txt
 
-    fileopen = open(attachment, 'w') #開啟檔案,w沒有該檔案就新增
+#    fileopen = open(attachment, 'w') #開啟檔案,w沒有該檔案就新增
+
+    fileopen = open("stock.csv", 'w') #開啟檔案,w沒有該檔案就新增
 
     f = open('/home/tim/GMAIL.txt','r') #於前一個相對目錄中放置登入GMAIL帳號密碼,目的為了不再GitHub顯示出來.
     ID = f.readline().strip('\n') #不包含換行符號\n:q
@@ -71,22 +73,26 @@ if __name__ == "__main__":
     #for i in a:
     #    print i[0],i[1],i[2]
 
-    fileopen.write("各股加權貢獻依據2015年10月27日下的權重計算".decode('utf8').encode('big5-hkscs')+"\n")
+    fileopen.write("各股加權貢獻依據2016年03月31日下的權重計算".decode('utf8').encode('big5-hkscs')+"\n")
     
     total = 0    
     for i in a:
        
         contribution = 0
         try:
-            contribution = float(Stock(i[0]).raw[-1][-2]) / float(Stock(i[0]).raw[-2][-3]) * today_weight * float(i[2]) / 100
+            contribution = float(Stock(i[0]).raw[-1][-2]) / float(Stock(i[0]).raw[-1][-3]) * today_weight * float(i[2]) / 100
         except:
             pass #抓到非數字跳過
         total = total + contribution
         
-        print i[0],i[1],contribution,total      
+        print i[0],i[1],Stock(i[0]).raw[-1][-3],Stock(i[0]).raw[-1][-2],"%.2f"%(contribution),"%.2f"%(total),today_weight, i[2]
         
         
-        fileopen.write(str(i[0])+','+str(i[1]).decode('utf8').encode('big5-hkscs')+','+str(contribution)+','+ str(total)+"\n")
+#        fileopen.write(str(i[0])+','+str(i[1]).decode('utf8').encode('big5-hkscs')+','+str(contribution)+','+ str(total)+"\n")
+#        fileopen.write(str(i[0])+',   '+str(i[1]).decode('utf8').encode('big5-hkscs')+',   '+"%.2f"%(contribution)+',   '+"%.2f"%(total)+"\n")
+         
+        fileopen.write(str(i[0])+',   '+str(i[1]).decode('utf8').encode('big5-hkscs')+',   '+ 
+        "%.2f"%(contribution)+',   '+"%.2f"%(total)+',     '+str(today_weight)+str(i[2])+"\n")
         
     fileopen.close()    #關閉檔案
 
@@ -97,9 +103,22 @@ if __name__ == "__main__":
     -xu %s \
     -xp %s \
     -u %s \
+    -o message-file=/home/tim/Stock_Bot/stock.csv \
+    '%(ID, PW, title))
+
+
+"""
+    os.system('sendEmail -o \
+    -f u160895@taipower.com.tw \
+    -t "WEI <weihautin@gmail.com>" \
+    -s smtp.gmail.com:587 \
+    -xu %s \
+    -xp %s \
+    -u %s \
     -m %s \
     -a %s \
     '%(ID, PW, title, content, attachment))
+"""
 
 
 # figoman1979@gmail.com

@@ -50,7 +50,7 @@ title = str(time_now+"-明天標的股") #Email郵件的標題 ex:2015-0411-選�
 
 attachment = str(time_now)+'.txt' #附件名稱使用當日時間 ex:2015-0411.txt
 
-fileopen = open(attachment, 'w') #開啟檔案,w沒有該檔案就新增
+fileopen = open("detail.txt", 'w') #開啟檔案,w沒有該檔案就新增
 
 f = open('/home/tim/GMAIL.txt','r') #於前一個相對目錄中放置登入GMAIL帳號密碼,目的為了不再GitHub顯示出來.
 ID = f.readline().strip('\n') #不包含換行符號\n
@@ -247,6 +247,7 @@ fileopen.close()                #關閉檔案
 
  
  
+"""
 os.system('sendEmail -o \
 -f weihautin@gmail.com  \
 -t "WEI <weihautin@gmail.com>" \
@@ -257,6 +258,18 @@ os.system('sendEmail -o \
 -m %s \
 -a %s \
 '%(ID, PW, title, content, attachment))
+"""
+
+os.system('sendEmail -o \
+-f weihautin@gmail.com  \
+-t "WEI <weihautin@gmail.com>" \
+-s smtp.gmail.com:587 \
+-xu %s \
+-xp %s \
+-u %s \
+-o message-file=/home/tim/Stock_Bot/detail.txt \
+'%(ID, PW, title))
+
 
 # figoman1979@gmail.com 
  
