@@ -108,7 +108,7 @@ if __name__ == "__main__":
 
     attachment = str(time_now)+'.txt' #附件名稱使用當日時間 ex:2015-0411.txt
 
-    fileopen = open(attachment, 'w') #開啟檔案,w沒有該檔案就新增
+    fileopen = open("weighted_index.txt", 'w') #開啟檔案,w沒有該檔案就新增
 
     f = open('/home/tim/GMAIL.txt','r') #於前一個相對目錄中放置登入GMAIL帳號密碼,目的為了不再GitHub顯示出來.
     ID = f.readline().strip('\n') #不包含換行符號\n:q
@@ -164,6 +164,19 @@ if __name__ == "__main__":
 
     fileopen.close() 
      
+
+    os.system('sendEmail -o \
+    -f u160895@taipower.com.tw \
+    -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
+    -s smtp.gmail.com:587 \
+    -xu %s \
+    -xp %s \
+    -u %s \
+    -o message-file=/home/tim/Stock_Bot/weighted_index.txt \
+    '%(ID, PW, title))
+
+   
+"""
     os.system('sendEmail -o \
     -f u160895@taipower.com.tw \
     -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
@@ -174,8 +187,8 @@ if __name__ == "__main__":
     -m %s \
     -a %s \
     '%(ID, PW, title, content_1, attachment))
-    
-   
+"""
+
     
     
     

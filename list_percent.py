@@ -34,7 +34,7 @@ title = str(time_now+"-今日各股漲跌幅度統計") #Email郵件的標題 ex
 
 attachment = str(time_now)+'percent.txt' #附件名稱使用當日時間 ex:2015-0411.txt
 
-fileopen = open(attachment, 'w') #開啟檔案,w沒有該檔案就新增
+fileopen = open("list_percent.txt", 'w') #開啟檔案,w沒有該檔案就新增
 
 f = open('/home/tim/GMAIL.txt','r') #於前一個相對目錄中放置登入GMAIL帳號密碼,目的為了不再GitHub顯示出來.
 ID = f.readline().strip('\n') #不包含換行符號\n
@@ -433,9 +433,8 @@ os.system('sendEmail -o \
  -xu %s \
  -xp %s \
  -u %s \
- -m %s \
- -a %s \
- '%(ID, PW, title, content, attachment))
+ -o message-file=/home/tim/Stock_Bot/list_percent.txt \
+ '%(ID, PW, title))
 
  
  
