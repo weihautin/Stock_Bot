@@ -4,14 +4,17 @@
 #
 # 請先安裝 sudo apt-get install sendemail
 
-import os
+import os, sys
 from grs import Stock
 from grs import TWSENo
 from weighted_index import Twse_Weighted_Index
 import csv
 from datetime import datetime
 
-
+try:
+        os.remove("stock.csv")
+except OSError:
+        pass
 
 
 Stock_no_name = TWSENo().all_stock  # 所有上市股票名稱與代碼字典 type: dict
@@ -120,5 +123,6 @@ if __name__ == "__main__":
     '%(ID, PW, title, content, attachment))
 """
 
+os.remove("stock.csv")
 
 # figoman1979@gmail.com

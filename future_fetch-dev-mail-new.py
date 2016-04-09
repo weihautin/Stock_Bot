@@ -12,6 +12,11 @@ import datetime
 #from datetime import datetime
 from time import strftime
 
+try:
+	os.remove("calculate_future_average.txt")
+except OSError:
+	pass
+
 
 start = time.time() #記錄程式執行後的開始時間
 today = strftime('%Y/%m/%d')
@@ -127,7 +132,7 @@ for  ii in date_tmp:
           
             html.close()
         
-#f.close()
+f.close()
 
 
 
@@ -438,16 +443,13 @@ PW = f.readline().strip('\n')
 
 
 os.system('sendEmail -o \
--f u160895@taipower.com.tw \
--t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
--s smtp.gmail.com:587 \
--xu %s \
--xp %s \
--u %s \
--o message-file=/home/tim/Stock_Bot/calculate_future_average.txt \
-'%(ID, PW, title))
+ -f u160895@taipower.com.tw \
+ -t "WEI <weihautin@gmail.com>" u160895@taipower.com.tw \
+ -s smtp.gmail.com:587 \
+ -xu %s \
+ -xp %s \
+ -u %s \
+ -o message-file=/home/tim/Stock_Bot/calculate_future_average.txt \
+ '%(ID, PW, title))
 
-
-
-
-
+os.remove("calculate_future_average.txt")

@@ -12,6 +12,10 @@ from grs import TWSENo
 from grs import OTCNo
 import time, itertools
 
+try:
+        os.remove("list_percent.txt")
+except OSError:
+        pass
 
 # 記錄開始時間 Record start time
 tStart = time.time()
@@ -437,6 +441,7 @@ os.system('sendEmail -o \
  '%(ID, PW, title))
 
  
+os.remove("list_percent.txt")
  
 # figoman1979@gmail.com 
 

@@ -11,6 +11,11 @@ from cStringIO import StringIO
 from dateutil.relativedelta import relativedelta
 import os
 
+try:
+        os.remove("weighted_index.txt")
+except OSError:
+        pass
+
 TWSE_HOST = 'http://www.twse.com.tw/'
 TWSE_CONNECTIONS = urllib3.connection_from_url(TWSE_HOST)
 
@@ -102,6 +107,7 @@ if __name__ == "__main__":
 #['104/04/20', 4912281564.0, 91460781461.0, 835649.0, 9552.85, -18.08]]
 #    0日期         1成交股數       2成交金額    3成交筆數  4加權指數   5漲跌
     
+
     content = "贏要衝,輸要縮."   #沒有辦法換行
     time_now = datetime.now().strftime("%Y%m%d-%H%M") #今天的日期 ex:2015-0411
     title = str(time_now+"-盤後週月季年線") #Email郵件的標題 ex:2015-0411-選股機器人
@@ -175,6 +181,7 @@ if __name__ == "__main__":
     -o message-file=/home/tim/Stock_Bot/weighted_index.txt \
     '%(ID, PW, title))
 
+    os.remove("weighted_index.txt")
    
 """
     os.system('sendEmail -o \

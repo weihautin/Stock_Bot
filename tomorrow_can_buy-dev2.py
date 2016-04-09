@@ -28,6 +28,11 @@ from rand_market_value import market_value as rank_market_value #股本排名
 from sell_buy_immediately import stock_buy_sell_oneday as oneday #是否為現股當充
 
 
+try:
+        os.remove("detail.txt")
+except OSError:
+        pass
+
 
 
 Stock_no_name = TWSENo().all_stock  # 所有上市股票名稱與代碼字典 type: dict
@@ -270,6 +275,7 @@ os.system('sendEmail -o \
 -o message-file=/home/tim/Stock_Bot/detail.txt \
 '%(ID, PW, title))
 
+os.remove("detail.txt")
 
 # figoman1979@gmail.com 
  

@@ -25,6 +25,10 @@ from sell_buy_immediately import stock_buy_sell_oneday as oneday #是否為現�
 
 
 
+try:
+        os.remove("Stock_5_10_20.txt")
+except OSError:
+        pass
 
 Stock_no_name = TWSENo().all_stock  # 所有上市股票名稱與代碼字典 type: dict
 
@@ -103,3 +107,4 @@ os.system('sendEmail -o \
 
 
 
+os.remove("Stock_5_10_20.txt")
