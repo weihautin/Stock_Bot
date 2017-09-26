@@ -31,6 +31,7 @@ from .twseno import TWSENo
 from cStringIO import StringIO
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+import time
 
 TWSE_HOST = 'http://www.twse.com.tw/'
 TWSE_CONNECTIONS = urllib3.connection_from_url(TWSE_HOST)
@@ -162,7 +163,6 @@ class OTCFetch(FetchData):
                     'mon': nowdatetime.month,
                     'stock': stock_no,
                     'rand': random.randrange(1, 1000000)}
-
         logging.info(url)
         result = GRETAI_CONNECTIONS.urlopen('GET', url)
         csv_files = csv.reader(StringIO(result.data))

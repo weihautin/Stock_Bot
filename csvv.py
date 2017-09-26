@@ -32,10 +32,10 @@ def yields_otc():
     EX: a['1101'] = [u'\u53f0\u6ce5', '14.93', '5.69', '1.37']
     """
     twse_yields = {}
-    f = open('/home/tim/Stock_Bot/update_csv/pera_1050330.csv','r')
+    f = open('/home/tim/Stock_Bot/update_csv/pera_1060706.csv','r')
     for row in csv.reader(f):
         try:
-            twse_yields[row[0]]=[row[1].decode('Big5'),row[2],row[3],row[4]]
+            twse_yields[row[0]]=[row[1].decode('Big5'),row[2],row[4],row[5]]
         except:
             pass
     f.close()
@@ -75,3 +75,6 @@ if __name__ == "__main__":
     a = vip_main()
     print a['1101']
     
+    b = yields_otc()
+    print b['1258']
+ 

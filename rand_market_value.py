@@ -26,7 +26,7 @@ def market_value():
     EX: a['1101'] = ['40', u'\u53f0\u6ce5', u'\u4e0a\u5e02', '369', '1541', '53.3', u'\u6c34\u6ce5\u5de5\u696d', u'\u8f9c\u6210\u5141']
     """
     dic_market_value = {}
-    f = open('/home/tim/Stock_Bot/update_csv/StockList_20150522.csv','r')
+    f = open('/home/tim/Stock_Bot/update_csv/StockList_20170706.csv','r')
     for row in csv.reader(f):
         try:
             dic_market_value[row[1]]=[row[0],row[2].decode('UTF-8'),row[3].decode('UTF-8'),row[4],row[5],row[6],row[7].decode('UTF-8'),row[8].decode('UTF-8')]
@@ -41,4 +41,4 @@ if __name__ == "__main__":
 
     a = market_value()
     print a['1101']
-    
+

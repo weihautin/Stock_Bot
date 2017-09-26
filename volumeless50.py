@@ -48,7 +48,7 @@ PW = f.readline().strip('\n')
 
 
 
-fileopen.write("\n"+"二十个交易日內, 5日均線>10日均線>20均線"+"\n\n")
+fileopen.write("\n"+"量縮50%"+"\n\n")
 
 #=====================
 
@@ -57,7 +57,7 @@ index = 1
 for i in OTC_no_list:
     #print i
     try:
-        if BestFourPoint(Stock(i,mons=3)).best_5_10_20_backtest(day):
+        if BestFourPoint(Stock(i,mons=1)).volumeless50():
            print i,'otc'         #暴量長紅2天
 
            fileopen.write(str(index)+" "+"-"+OTC_no_name[i].encode("UTF-8")+"-"+i+"-"+"殖益率"+str(fields_otc()[i][2])+"\n")
@@ -67,7 +67,6 @@ for i in OTC_no_list:
 
 fileopen.close()                #關閉檔案
  
-
 os.system('sendEmail -o \
  -f u160895@taipower.com.tw \
  -t "WEI <weihautin@gmail.com>" \
@@ -75,7 +74,6 @@ os.system('sendEmail -o \
  -xu %s \
  -xp %s \
  -u %s \
- -o message-file=/home/tim/Stock_5_10_20.txt \
+ -o message-file=/home/tim/Stock_Bot/Stock_5_10_20.txt \
  '%(ID, PW, title))
-
 

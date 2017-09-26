@@ -64,6 +64,59 @@ class BestFourPoint(object):
         """
         return self.data.moving_average(5)[0][-1] >  self.data.moving_average(10)[0][-1] > self.data.moving_average(20)[0][-1]
 
+
+    def volumeless50(self):
+        """ 
+        昨日成交量為五均線的一半以下
+        """
+        tmp = (self.data.value[-1]/self.data.moving_average_value(5)[0][-1] ) < 0.5
+
+        return tmp 
+
+    def volumeless20(self):
+        """ 
+        昨日成交量為五均線的一半以下
+        """
+        tmp = (self.data.value[-1]/self.data.moving_average_value(5)[0][-1] ) < 0.2
+
+        return tmp
+
+
+    def volumeless10(self):
+        """ 
+        昨日成交量為五均線的一半以下
+        """
+        tmp = (self.data.value[-1]/self.data.moving_average_value(5)[0][-1] ) < 0.1
+
+        return tmp
+
+    def volumegreat3(self):
+        """ 
+        昨日成交量為五均線的三倍
+        """
+
+        tmp = (self.data.value[-1]/self.data.moving_average_value(5)[0][-2] ) > 3  
+
+        return tmp
+
+    def volumegreat5(self):
+        """ 
+        昨日成交量為五均線的5倍
+        """
+
+        tmp = (self.data.value[-1]/self.data.moving_average_value(5)[0][-2] ) > 5  
+
+        return tmp
+
+    def volumegreat10(self):
+        """ 
+        昨日成交量為五均線的10倍
+        """
+
+        tmp = (self.data.value[-1]/self.data.moving_average_value(5)[0][-2] ) > 10
+
+        return tmp
+
     def best_5_10_20_backtest(self,n): 
         """ 
         5>10>20日均線,含n日回測
@@ -146,10 +199,10 @@ class BestFourPoint(object):
         return result
 
     def otc_y_v_t_r(self):
-        """ 昨天暴量長紅,今天又上漲
+        """ 昨天暴量長紅,今天又上漲  -1今天 -2昨天 -3前天
         """
         result = self.data.value[-2] > self.data.value[-3] and self.data.price[-2] > self.data.openprice[-2] and \
-                 self.data.price[-1]/self.data.price[-2] >= 1.01  and self.data.price[-1]/self.data.price[-2] <= 1.11 and self.data.value[-1]*1000 > 500   
+                 self.data.price[-1]/self.data.price[-2] >= 1.01  and self.data.price[-1]/self.data.price[-2] <= 1.11 and self.data.value[-1]*1000 > 50   
         return result
 
 	

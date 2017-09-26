@@ -33,13 +33,13 @@ OTC_no_list = OTCNo().all_stock_no # 所有上櫃股票代碼
 content = "贏要衝,輸要縮."   #沒有辦法換行
 
 time_now = datetime.now().strftime("%Y%m%d_%H%M%S") #今天的日期 ex:2015-0411
-title = str(time_now+"-5_10_20標的股") #Email郵件的標題 ex:2015-0411-選股機器人
+title = str(time_now+"增5倍") #Email郵件的標題 ex:2015-0411-選股機器人
 
 day = 20
 
 #attachment = str(time_now)+'-'+str(day)+'.txt' #附件名稱使用當日時間 ex:2015-0411.txt
 
-fileopen = open("Stock_5_10_20.txt", 'w') #開啟檔案,w沒有該檔案就新增
+fileopen = open("volumegreat5.txt", 'w') #開啟檔案,w沒有該檔案就新增
 
 f = open('/home/tim/GMAIL.txt','r') #於前一個相對目錄中放置登入GMAIL帳號密碼,目的為了不再GitHub顯示出來.
 ID = f.readline().strip('\n') #不包含換行符號\n
@@ -48,7 +48,7 @@ PW = f.readline().strip('\n')
 
 
 
-fileopen.write("\n"+"二十个交易日內, 5日均線>10日均線>20均線"+"\n\n")
+fileopen.write("\n"+"增5倍"+"\n\n")
 
 #=====================
 
@@ -57,7 +57,7 @@ index = 1
 for i in OTC_no_list:
     #print i
     try:
-        if BestFourPoint(Stock(i,mons=3)).best_5_10_20_backtest(day):
+        if BestFourPoint(Stock(i,mons=1)).volumegreat5():
            print i,'otc'         #暴量長紅2天
 
            fileopen.write(str(index)+" "+"-"+OTC_no_name[i].encode("UTF-8")+"-"+i+"-"+"殖益率"+str(fields_otc()[i][2])+"\n")
@@ -67,7 +67,6 @@ for i in OTC_no_list:
 
 fileopen.close()                #關閉檔案
  
-
 os.system('sendEmail -o \
  -f u160895@taipower.com.tw \
  -t "WEI <weihautin@gmail.com>" \
@@ -75,7 +74,6 @@ os.system('sendEmail -o \
  -xu %s \
  -xp %s \
  -u %s \
- -o message-file=/home/tim/Stock_5_10_20.txt \
+ -o message-file=/home/tim/volumegreat5.txt \
  '%(ID, PW, title))
-
 
