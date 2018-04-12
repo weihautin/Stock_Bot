@@ -1,0 +1,24 @@
+# -*- coding: utf-8 -*-
+
+import urllib
+from bs4 import BeautifulSoup
+url = 'http://mops.twse.com.tw/mops/web/ajax_t164sb04?'\
+        'encodeURIComponent=1&step=1&firstin=1&off=1&keyword4=&code1=&TYPEK2=&checkbtn=&queryName=co_id&TYPEK=all&isnew=false&co_id=2330&year=105&season=03'
+#url = 'http://mops.twse.com.tw/server-java/t164sb01?step=1&CO_ID=2330&SYEAR=2017&SSEASON=2&REPORT_ID=C'
+response = urllib.urlopen(url)
+html = response.read()
+sp = BeautifulSoup(html.decode('utf-8'))  #cp950
+print(sp)
+print url
+
+trs=sp.find_all('tr')
+for tr in trs:
+    tds=tr.find_all('td')
+    for td in tds:
+        if (td.get_text().strip()==u"基本每股盈餘") :
+            if (tds[1].get_text().strip()!=''):
+                print('2330','106','2',tds[1].get_text().strip())
+                print('2330','106','2',tds[3].get_text().strip()) 
+                print('2330','106','2',tds[5].get_text().strip())
+                print('2330','106','2',tds[7].get_text().strip())
+                
